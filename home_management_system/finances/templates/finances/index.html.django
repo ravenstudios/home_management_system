@@ -1,0 +1,56 @@
+{% extends "main_index.html" %}
+{% load static %}
+{% block title %}Finances{% endblock title %}
+
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'finances/style.css' %}">
+<h1>Finances{{name}}</h1>
+
+
+<table>
+  <tr>
+    {% for paycheck in paychecks %}
+      <td>
+        <table>
+          <tr>
+            <th>{{paycheck.person}}</th>
+            <th> {{ paycheck.date}}</th>
+            <th> ${{ paycheck.ammount}}</th>
+          </tr>
+          <tr>
+            <th>Bill</th>
+            <th>Ammount</th>
+            <th>Due Date</th>
+          </tr>
+          {% for bill in paycheck.bills %}
+            <tr>
+              <td>{{bill.bill}}</td>
+              <td>${{bill.ammount}}</td>
+              <td>{{bill.due_date}}</td>
+            </tr>
+            {% endfor %}
+        <tr>
+          <th>Bills Total</th>
+          <th>Money In Bank</th>
+          <th>Balance</th>
+        </tr>
+        <tr>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+        </tr>
+        </table>
+      </td>
+
+    {% endfor %}
+  </tr>
+</table>
+
+
+
+
+
+
+
+{% endblock content %}
