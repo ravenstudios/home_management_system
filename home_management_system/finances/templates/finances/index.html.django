@@ -12,9 +12,9 @@
   <tr>
     {% for paycheck in paychecks %}
       <td>
-        <table>
+        <table class="paycheck-table" id="{{paycheck.name}}-{{paycheck.date}}">
           <tr>
-            <th>{{paycheck.person}}</th>
+            <th>{{paycheck.name}}</th>
             <th> {{ paycheck.date}}</th>
             <th> ${{ paycheck.ammount}}</th>
           </tr>
@@ -23,9 +23,9 @@
             <th>Ammount</th>
             <th>Due Date</th>
           </tr>
-          {% for bill in paycheck.bills %}
+          {% for bill in paycheck.bills.all %}
             <tr>
-              <td>{{bill.bill}}</td>
+              <td>{{bill.name}}</td>
               <td>${{bill.ammount}}</td>
               <td>{{bill.due_date}}</td>
             </tr>
@@ -41,6 +41,7 @@
           <td>0.00</td>
         </tr>
         </table>
+        <button class="add-new-bill-button-class" type="button" name="add-new-bill-button">Add new bill</button>
       </td>
 
     {% endfor %}
@@ -52,5 +53,6 @@
 
 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'finances/js.js' %}"></script>
 {% endblock content %}
