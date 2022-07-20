@@ -7,6 +7,9 @@ class Bill(models.Model):
     name = models.CharField(max_length=255)
     ammount = models.IntegerField()
     due_date = models.IntegerField()
+    def __str__(self):
+        return self.name
+
 
 
 class Paycheck(models.Model):
@@ -15,8 +18,7 @@ class Paycheck(models.Model):
     ammount = models.IntegerField()
     bills = models.ManyToManyField(Bill,  blank=True)
 
-    def __str__(self):
-        return self.name
+
 
 
 

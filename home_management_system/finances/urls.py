@@ -17,8 +17,9 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 
-
+app_name = 'finances'
 urlpatterns = [
     path('', views.index, name='index'),
-    
+    path('create_new_bill', views.create_new_bill, name='create_new_bill'),
+
 ]

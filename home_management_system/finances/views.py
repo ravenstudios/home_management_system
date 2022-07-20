@@ -5,7 +5,6 @@ from .models import Paycheck, Bill
 
 def index(request):
 
-    obj, created = Paycheck.objects.update_or_create(name="y1oyo", date="7/18/2022", ammount=1123.123)
 
     paychecks_to_add = []
     paychecks = Paycheck.objects.all()
@@ -30,11 +29,16 @@ def index(request):
 
 
 
-
-
-
-
-
-
     context = {"bills":bills, "paychecks": paychecks}
     return render(request, 'finances/index.html.django', context)
+
+
+def create_new_bill(request):
+
+    post = request.POST
+    name = post.get("name")
+    ammount = post.get("ammount")
+    due_date = post.get("due_date")
+    obj, created = Bill.objects.update_or_create(name=name, ammount=ammount, due_date = due_date)
+
+    return  HttpResponse("created new bill")

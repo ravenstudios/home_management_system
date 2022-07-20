@@ -49,7 +49,23 @@
 </table>
 
 
+<br>
 
+<form action="{% url 'finances:create_new_bill' %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h1>Create new bill</h1></legend>
+    <label for="jsdfjsdfjsdf">Name</label>
+    <input type="text" name="name" value="">
+    <label for="jsdfjsdfjsdf">Ammount</label>
+    <input type="text" name="ammount" value="">
+    <label for="jsdfjsdfjsdf">Due Date</label>
+    <input type="text" name="due_date" value="">
+    <label jsgjs</label><br>
+
+</fieldset>
+<input type="submit" value="Add new bill">
+</form>
 
 
 
