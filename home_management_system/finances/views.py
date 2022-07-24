@@ -2,43 +2,74 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import datetime
 from .models import Paycheck, Bill
+from django.shortcuts import redirect
+from .forms import CreateNewBill
 
 def index(request):
-
-
-    paychecks_to_add = []
+    form = CreateNewBill(request.POST)
     paychecks = Paycheck.objects.all()
     bills = Bill.objects.all()
-
-    for paycheck in paychecks:
-        paychecks_to_add = []
-        for bill in bills:
-            if bill != "":
-                bill_due_date = int(bill.due_date)
-                paycheck_date = int(paycheck.date.split("/")[1])
-
-        #         if bill_due_date <= paycheck_date:
-        #             paychecks_to_add.append(bill)
-        #
-        #
-        #
-        # for pta in paychecks_to_add:
-        #     pta.save()
-        #     paycheck.bills.add(pta)
-
-
-
-
-    context = {"bills":bills, "paychecks": paychecks}
+    context = {"bills":bills, "paychecks": paychecks, "form":form}
     return render(request, 'finances/index.html.django', context)
 
 
 def create_new_bill(request):
+    if request.POST:
+        print(request.POST)
+        form = CreateNewBill(request.POST)
+        if form.is_valid():
+            form.save()
 
-    post = request.POST
-    name = post.get("name")
-    ammount = post.get("ammount")
-    due_date = post.get("due_date")
-    obj, created = Bill.objects.update_or_create(name=name, ammount=ammount, due_date = due_date)
+    return redirect('/finances/')
 
-    return  HttpResponse("created new bill")
+
+#
+# def deletex(request, id):
+#     print(request.POST)
+#     return redirect('/finances/')
+
+
+    # # t.save() # this will update only
+def add_bill_to_paycheck(request):
+    return redirect('/finances/')
+
+
+
+
+
+def delete_bill(request, name, date):
+    paycheck = Paycheck.objects.get(name=name, date=date)
+    paycheck.delete()
+    #   return HttpResponseRedirect(reverse('index'))
+    return redirect('/finances/')
+
+def delete_paycheck(request, name, date):
+    print(name, date)
+    paycheck = Paycheck.objects.get(name=name, date=date)
+    paycheck.delete()
+    #   return HttpResponseRedirect(reverse('index'))
+    return redirect('/finances/')
+
+# def add(request):
+#   template = loader.get_template('add.html')
+#   return HttpResponse(template.render({}, request))
+#
+#  def addrecord(request):
+#   first = request.POST['first']
+#   last = request.POST['last']
+#   member = Members(firstname=first, lastname=last)
+#   member.save()
+#
+# return HttpResponseRedirect(reverse('index'))
+#
+# def delete(request, id):
+#   member = Members.objects.get(id=id)
+#   member.delete()
+#   return HttpResponseRedirect(reverse('index'))
+#
+# def update(request, id):
+#   mymember = Members.objects.get(id=id)
+#   template = loader.get_template('update.html')
+#   context = {
+#     'mymember': mymember,
+#   }

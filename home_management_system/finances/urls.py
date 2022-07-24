@@ -21,5 +21,7 @@ app_name = 'finances'
 urlpatterns = [
     path('', views.index, name='index'),
     path('create_new_bill', views.create_new_bill, name='create_new_bill'),
+    path('delete_bill/<str:name>/<path:date>', views.delete_bill, name='delete_bill'),
+    path('add_bill_to_paycheck', views.add_bill_to_paycheck, name='add_bill_to_paycheck'),
 
 ]

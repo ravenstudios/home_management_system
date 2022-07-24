@@ -18,9 +18,5 @@ class Paycheck(models.Model):
     ammount = models.IntegerField()
     bills = models.ManyToManyField(Bill,  blank=True)
 
-
-
-
-
     def __str__(self):
         return self.name

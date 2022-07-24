@@ -28,6 +28,7 @@
               <td>{{bill.name}}</td>
               <td>${{bill.ammount}}</td>
               <td>{{bill.due_date}}</td>
+              <td><a href="{% url 'finances:delete_bill' name=paycheck.name date=paycheck.date %}">Del</a></td>
             </tr>
             {% endfor %}
         <tr>
@@ -41,7 +42,23 @@
           <td>0.00</td>
         </tr>
         </table>
-        <button class="add-new-bill-button-class" type="button" name="add-new-bill-button">Add new bill</button>
+
+
+        <form method="POST" action="{% url 'finances:add_bill_to_paycheck' }" >
+          <fieldset>
+            <legend><h1>Add Bill</h1></legend>
+            <select name="item_id">
+              <option selected="selected" disabled>Bills:</option>
+            {% for bill in bills %}
+                <option value="{{ bill.name }}">{{ bill.name }}</option>
+            {% endfor %}
+            </select>
+            <input type="submit" value="Select">
+          </fieldset>
+
+        </form>
+
+
       </td>
 
     {% endfor %}
@@ -51,20 +68,13 @@
 
 <br>
 
-<form action="{% url 'finances:create_new_bill' %}" method="post">
+<form method="POST" action="{% url 'finances:create_new_bill' %}"  enctype="multipart/form-data">
 {% csrf_token %}
-<fieldset>
+  <fieldset>
     <legend><h1>Create new bill</h1></legend>
-    <label for="jsdfjsdfjsdf">Name</label>
-    <input type="text" name="name" value="">
-    <label for="jsdfjsdfjsdf">Ammount</label>
-    <input type="text" name="ammount" value="">
-    <label for="jsdfjsdfjsdf">Due Date</label>
-    <input type="text" name="due_date" value="">
-    <label jsgjs</label><br>
-
-</fieldset>
-<input type="submit" value="Add new bill">
+    {{form}}
+    <input type="submit" value=Submit">
+  </fieldset>
 </form>
 
 

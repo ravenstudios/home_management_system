@@ -1,4 +1,22 @@
+from django.forms import ModelForm
+from .models import Bill, Paycheck
 from django import forms
 
-class create_new_bill(forms.Form):
-    your_name = forms.CharField(label='Your name', max_length=100)
+class CreateNewBill(ModelForm):
+    name = forms.CharField()
+    ammount = forms.IntegerField()
+    due_date = forms.IntegerField()
+
+    class Meta:
+        model = Bill
+        fields = ["name", "ammount", "due_date"]
+
+
+class CreateNewPaycheck(ModelForm):
+    name = forms.CharField()
+    ammount = forms.IntegerField()
+    date = forms.IntegerField()
+
+    class Meta:
+        model = Paycheck
+        fields = ["name", "ammount", "date"]
