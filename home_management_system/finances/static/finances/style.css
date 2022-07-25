@@ -10,3 +10,7 @@ table, td, th {
 th, td{
   padding: 10px;
 }
+
+#del-icon{
+  width: 20px;
+}

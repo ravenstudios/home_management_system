@@ -23,12 +23,15 @@
             <th>Ammount</th>
             <th>Due Date</th>
           </tr>
+
           {% for bill in paycheck.bills.all %}
             <tr>
               <td>{{bill.name}}</td>
               <td>${{bill.ammount}}</td>
               <td>{{bill.due_date}}</td>
-              <td><a href="{% url 'finances:delete_bill' name=paycheck.name date=paycheck.date bill=bill.id %}">Del</a></td>
+              <td><a href="{% url 'finances:delete_bill' name=paycheck.name date=paycheck.date bill=bill.id %}">
+                <img id=del-icon src="{% static 'finances/images/delete.png' %}" alt="Delete icon">
+              </a></td>
             </tr>
             {% endfor %}
         <tr>
@@ -37,13 +40,24 @@
           <th>Balance</th>
         </tr>
         <tr>
-          <td>0.00</td>
-          <td>0.00</td>
-          <td>0.00</td>
+          <td><p id="bills-total">{{bills_total.ammount__sum}}</p></td>
+          <td>
+            <form method="POST" action="{% url 'finances:update_money_in_bank' paycheck.name paycheck.date  %}" enctype="multipart/form-data">
+              {% csrf_token %}
+              <fieldset>
+                <legend><h5>Money In The Bank</h5></legend>
+                <p id="ammount-in-bank">{{paycheck.ammount_in_bank}}</p>
+                {{update_money_in_bank}}
+                <input type="submit" value="Update">
+              </fieldset>
+            </form>
+          </td>
+          <td><p id="balance"></p></td>
         </tr>
         <tr>
-
+<!--****************************************************************************************-->
           <td>
+
             <form method="POST" action="{% url 'finances:add_bill_to_paycheck' paycheck.name paycheck.date  %}" enctype="multipart/form-data">
               {% csrf_token %}
               <fieldset>
@@ -56,24 +70,16 @@
               <input type="submit" value="Submit">
               </fieldset>
             </form>
+
           </td>
         </tr>
-
         </table>
-
-
-
-
-
-
-
     {% endfor %}
   </tr>
 </table>
 
 
 <br>
-
 <form method="POST" action="{% url 'finances:create_new_bill' %}"  enctype="multipart/form-data">
 {% csrf_token %}
   <fieldset>
@@ -84,7 +90,14 @@
 </form>
 
 <br>
-
+<form method="POST" action="{% url 'finances:create_new_paycheck' %}"  enctype="multipart/form-data">
+{% csrf_token %}
+  <fieldset>
+    <legend><h1>Create new Paycheck</h1></legend>
+    {{create_new_paycheck}}
+    <input type="submit" value="Submit">
+  </fieldset>
+</form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="{% static 'finances/js.js' %}"></script>

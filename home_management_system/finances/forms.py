@@ -15,8 +15,17 @@ class CreateNewBill(ModelForm):
 class CreateNewPaycheck(ModelForm):
     name = forms.CharField()
     ammount = forms.IntegerField()
-    date = forms.IntegerField()
+    date = forms.CharField()
 
     class Meta:
         model = Paycheck
         fields = ["name", "ammount", "date"]
+
+
+
+class UpdateMoneyInBank(ModelForm):
+    ammount = forms.IntegerField()
+
+    class Meta:
+        model = Paycheck
+        fields = ["ammount"]

@@ -1,18 +1,4 @@
-"""home_management_system URL Configuration
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
 from . import views
@@ -21,7 +7,9 @@ app_name = 'finances'
 urlpatterns = [
     path('', views.index, name='index'),
     path('create_new_bill', views.create_new_bill, name='create_new_bill'),
+    path('create_new_paycheck', views.create_new_paycheck, name='create_new_paycheck'),
     path('delete_bill/<str:name>/<path:date>/<str:bill>', views.delete_bill, name='delete_bill'),
     path('add_bill_to_paycheck/<str:name>/<path:date>', views.add_bill_to_paycheck, name='add_bill_to_paycheck'),
+    path('update_money_in_bank/<str:name>/<path:date>', views.update_money_in_bank, name='update_money_in_bank'),
 
 ]
