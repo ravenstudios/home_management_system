@@ -32,7 +32,7 @@ def add_bill_to_paycheck(request, name, date):
         print(f"bill {bill}")
         paycheck = Paycheck.objects.get(name=name, date=date)
         paycheck.bills.add(bill)
-        
+
 
 
     return redirect('/finances/')
@@ -40,9 +40,12 @@ def add_bill_to_paycheck(request, name, date):
 
 
 
-def delete_bill(request, name, date):
+def delete_bill(request, name, date, bill):
     paycheck = Paycheck.objects.get(name=name, date=date)
-    paycheck.delete()
+
+    bill = Bill.objects.get(id=bill)
+    paycheck.bills.remove(bill)
+    # paycheck.delete()
     #   return HttpResponseRedirect(reverse('index'))
     return redirect('/finances/')
 

@@ -28,7 +28,7 @@
               <td>{{bill.name}}</td>
               <td>${{bill.ammount}}</td>
               <td>{{bill.due_date}}</td>
-              <td><a href="{% url 'finances:delete_bill' name=paycheck.name date=paycheck.date %}">Del</a></td>
+              <td><a href="{% url 'finances:delete_bill' name=paycheck.name date=paycheck.date bill=bill.id %}">Del</a></td>
             </tr>
             {% endfor %}
         <tr>
