@@ -1,31 +1,29 @@
 from django.forms import ModelForm
 from .models import Bill, Paycheck
 from django import forms
+from django.forms.widgets import DateInput, NumberInput
 
 class CreateNewBill(ModelForm):
-    name = forms.CharField()
-    ammount = forms.IntegerField()
-    due_date = forms.IntegerField()
-
+    name = forms.CharField(required=False)
+    ammount = forms.IntegerField(required=False)
+    due_date = forms.DateField(widget=NumberInput(attrs={'type': 'date'}))
     class Meta:
         model = Bill
         fields = ["name", "ammount", "due_date"]
 
 
-class CreateNewPaycheck(ModelForm):
-    name = forms.CharField()
-    ammount = forms.IntegerField()
-    date = forms.CharField()
 
+class CreateNewPaycheck(ModelForm):
+    name = forms.CharField(required=False)
+    ammount = forms.IntegerField(required=False)
+    date = forms.DateField(widget=NumberInput(attrs={'type': 'date'}))
     class Meta:
         model = Paycheck
         fields = ["name", "ammount", "date"]
 
 
-
 class UpdateMoneyInBank(ModelForm):
-    ammount = forms.IntegerField()
-
+    ammount_in_bank = forms.IntegerField(label="XAmmount in bank")
     class Meta:
         model = Paycheck
-        fields = ["ammount"]
+        fields = ["ammount_in_bank"]

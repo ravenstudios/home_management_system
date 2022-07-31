@@ -42,26 +42,30 @@
         <tr>
           <td><p id="bills-total">{{bills_total.ammount__sum}}</p></td>
           <td>
-            <form method="POST" action="{% url 'finances:update_money_in_bank' paycheck.name paycheck.date  %}" enctype="multipart/form-data">
+<!--**************************MONEY IN THE BANK**************************************************************-->
+            {# {{paycheck.ammount_in_bank}} #}
+            <form method="POST" action="{% url 'finances:update_money_in_bank' paycheck.name paycheck.date %}" enctype="multipart/form-data">
               {% csrf_token %}
               <fieldset>
-                <legend><h5>Money In The Bank</h5></legend>
-                <p id="ammount-in-bank">{{paycheck.ammount_in_bank}}</p>
+                <legend><h1>Money in bank</h1></legend>
+                <p>${{paycheck.ammount_in_bank}}.00</p>
                 {{update_money_in_bank}}
                 <input type="submit" value="Update">
               </fieldset>
             </form>
           </td>
-          <td><p id="balance"></p></td>
+          <td>
+            <p id="balance">rgwf</p>
+          </td>
         </tr>
         <tr>
-<!--****************************************************************************************-->
+<!--**************************CREATE NEW BILL**************************************************************-->
           <td>
 
             <form method="POST" action="{% url 'finances:add_bill_to_paycheck' paycheck.name paycheck.date  %}" enctype="multipart/form-data">
               {% csrf_token %}
               <fieldset>
-                <legend><h1>Create new bill</h1></legend>
+                <legend><h1>Add bill</h1></legend>
                 <select id="bills-dropdown" name="bill" required>
                     {% for bill in bills %}
                         <option value="{{bill.id}}">{{bill.name}}</option>

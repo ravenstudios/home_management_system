@@ -74,9 +74,9 @@ def delete_paycheck(request, name, date):
 
 def update_money_in_bank(request, name, date):
     paycheck = Paycheck.objects.get(name=name, date=date)
-    money_in_bank_ammount = request.POST.get("ammount")
-    # print(request.POST)
+    money_in_bank_ammount = request.POST.get("ammount_in_bank")
+    print(f"money_in_bank_ammount: {money_in_bank_ammount}")
     paycheck.ammount_in_bank = money_in_bank_ammount
     paycheck.save()
-    print(f"payckeck: {paycheck}")
+    # print(f"payckeck: {paycheck}")
     return redirect('/finances/')
