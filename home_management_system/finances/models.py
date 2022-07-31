@@ -16,6 +16,7 @@ class Bill(models.Model):
 class Paycheck(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
+    ammount = models.IntegerField(null=True)
     ammount_in_bank = models.IntegerField(null=True)
     bills = models.ManyToManyField(Bill, blank=True)
     date = models.DateField()
