@@ -41,16 +41,28 @@
         </tr>
         <tr>
           <td><p id="bills-total">{{bills_total.ammount__sum}}</p></td>
+
+
+          <td>
+
+            
+
+          </td>
+
+
           <td>
 <!--**************************MONEY IN THE BANK**************************************************************-->
             {# {{paycheck.ammount_in_bank}} #}
             <form method="POST" action="{% url 'finances:update_money_in_bank' paycheck.name paycheck.date %}" enctype="multipart/form-data">
               {% csrf_token %}
               <fieldset>
-                <legend><h1>Money in bank</h1></legend>
+                <legend><h5>Money in bank</h5></legend>
+                <br>
                 <p>${{paycheck.ammount_in_bank}}.00</p>
                 {{update_money_in_bank}}
                 <input type="submit" value="Update">
+                <br>
+
               </fieldset>
             </form>
           </td>
