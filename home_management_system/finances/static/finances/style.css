@@ -18,3 +18,7 @@ th, td{
 #del-icon{
   width: 20px;
 }
+
+#add_bill_to_paycheck_name{
+  color:green;
+}

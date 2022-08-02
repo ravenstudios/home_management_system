@@ -27,3 +27,11 @@ class UpdateMoneyInBank(ModelForm):
     class Meta:
         model = Paycheck
         fields = ["ammount_in_bank"]
+
+
+
+class UpdateBill(ModelForm):
+    ammount = forms.DecimalField(label="Ammount", max_digits=6, decimal_places=2)
+    class Meta:
+        model = Bill
+        fields = ["ammount"]
