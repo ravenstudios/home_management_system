@@ -1,6 +1,6 @@
 {# {% extends "main_index.html" %} #}
 {% load static %}
-{% block title %}Finances{% endblock title %}
+
 
 
 {# {% block content %} #}
@@ -17,53 +17,10 @@
   <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Finances</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Navbar Link</a></li>
-        <li><a href="#">Edit Bills</a></li>
         <li>
-
-
-          <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
-
-          <!-- Modal Structure -->
-          <div id="modal1" class="modal modal-fixed-footer">
-            <div class="modal-content">
-              <table>
-                <tr>
-                  <th>Name</th>
-                  <th>Ammount</th>
-                  <th>Due Date</th>
-                  {% for bill in bills.all %}
-                    <tr>
-                      <td>{{bill.name}}</td>
-                      <td>{{bill.ammount}}</td>
-                      <td>{{bill.due_date}}</td>
-                      <td><a class="btn-floating blue btn-small"href="{% url 'finances:delete_bill' name=bill.name   %}"><i class="material-icons">delete</i></a></li></td>
-                      <td>
-                        <form method="POST" action="{% url 'finances:create_new_bill' %}"  enctype="multipart/form-data">
-                        {% csrf_token %}
-                          <fieldset>
-                            <legend><h5>Edit Bill</h5></legend>
-                            {{update_bill}}
-                            <input type="submit" value="Submit">
-                          </fieldset>
-                        </form>
-                      </td>
-
-                    </tr>
-                  {% endfor %}
-                </tr>
-              </table>
-            </div>
-            <div class="modal-footer">
-              <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-            </div>
-          </div>
-
-
+          {% include 'finances/bills.html.django' %}
         </li>
       </ul>
-
-
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>
   </nav>
@@ -72,92 +29,7 @@
       <br><br>
 
       <div class="row">
-      {% for paycheck in paychecks %}
-
-        <div class="col s6 m6">
-          <div class="card  darken-1">
-            <div class="card-content ">
-              <span class="card-title">
-                <table>
-                  <tr>
-                    <td>{{paycheck.name}}</td>
-                    <td>${{paycheck.ammount}}</td>
-                    <td>{{paycheck.date|date:'M-d'}}</td>
-                  </tr>
-                </table>
-
-                <a class="btn-floating blue btn-small"href="{% url 'finances:delete_paycheck' name=paycheck.name date=paycheck.date  %}"><i class="material-icons">delete</i></a></li>
-              </span>
-              <table class="collection">
-                <tr>
-                  <th class="collection-item">Bill</th>
-                  <th class="collection-item">Ammount</th>
-                  <th class="collection-item">Due Date</th>
-                </tr>
-
-              {% for bill in paycheck.bills.all %}
-
-                <tr>
-                  <td class="collection-item">{{bill.name}}</td>
-                  <td class="collection-item">{{bill.ammount}}</td>
-                  <td class="collection-item">{{bill.due_date|date:'M-d'}}</td>
-
-                  <td><a class="btn-floating blue btn-small" href="{% url 'finances:delete_bill_from_paycheck' name=paycheck.name date=paycheck.date bill=bill.name %}"><i class="material-icons">delete</i></a></li></td>
-                  <td><p>
-                        <label>
-                          <input type="checkbox" />
-                          <span>Paid</span>
-                        </label>
-                      </p></td>
-                </tr>
-              {% endfor %}
-
-              </table>
-              <table class="collection">
-                <tr>
-                  <th>Bills Total</th>
-                  <th>Ammount In Bank</th>
-                  <th>Balance</th>
-                </tr>
-                <tr>
-                  <td id="bills-total">${{paycheck.bills_total}}  </td>
-                  <td id="ammount-in-bank">${{paycheck.ammount}}</td>
-                  <td id="balance">${{paycheck.balance}}</td>
-                </tr>
-              </table>
-
-
-
-
-              <div class="card-action">
-                  <form method="POST" action="{% url 'finances:add_bill_to_paycheck' paycheck.name paycheck.date  %}" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <fieldset>
-                      <legend><h5>Add bill</h5></legend>
-                      <span>
-                        <select class="browser-default" id="bills-dropdown" name="bill" required  onchange="submit">
-                          <option value="" disabled selected>Choose your option</option>
-                            {% for bill in bills %}
-                                <option value="{{bill.name}}">
-                                  <div id="add_bill_to_paycheck_name">{{bill.name}} &#32; &#32; &#32;</div>
-                                  <div id="add_bill_to_paycheck_ammount">${{bill.ammount}}&#32; &#32; &#32;</div>
-                                  <div id="add_bill_to_paycheck_due_date">{{bill.due_date|date:'M-d'}}</div>
-                                </option>
-                            {% endfor %}
-                        </select>
-                        <button class="btn-floating blue btn-small"  name="button" type="submit">
-                          <i class="material-icons">send</i>
-                        </button>
-                      </span>
-                    </fieldset>
-                  </form>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-      {% endfor %}
+        {% include 'finances/paycheck.html.django' %}
       </div>
 
 

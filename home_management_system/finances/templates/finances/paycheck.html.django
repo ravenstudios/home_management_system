@@ -1,0 +1,75 @@
+
+{% for paycheck in paychecks %}
+
+  <div class="col s6 m6">
+    <div class="card  darken-1">
+      <div class="card-content ">
+        <span class="card-title">
+          <table>
+            <tr>
+              <td>{{paycheck.name}}</td>
+              <td>${{paycheck.ammount}}</td>
+              <td>{{paycheck.date|date:'M-d'}}</td>
+              <td>
+                <a class="btn-floating blue btn-small"href="{% url 'finances:delete_paycheck' name=paycheck.name date=paycheck.date  %}"><i class="material-icons">edit</i></a></li>
+              </td>
+              <td>
+                <a class="btn-floating blue btn-small"href="{% url 'finances:delete_paycheck' name=paycheck.name date=paycheck.date  %}"><i class="material-icons">delete</i></a></li>
+              </td>
+            </tr>
+          </table>
+
+
+        </span>
+        <table class="collection">
+          <tr>
+            <th class="collection-item">Bill</th>
+            <th class="collection-item">Ammount</th>
+            <th class="collection-item">Due Date</th>
+            <th class="collection-item">Delete</th>
+            <th class="collection-item">Paid</th>
+          </tr>
+
+        {% for bill in paycheck.bills.all %}
+
+          <tr>
+            <td class="collection-item">{{bill.name}}</td>
+            <td class="collection-item">{{bill.ammount}}</td>
+            <td class="collection-item">{{bill.due_date|date:'M-d'}}</td>
+
+            <td><a class="btn-floating blue btn-small" href="{% url 'finances:delete_bill_from_paycheck' name=paycheck.name date=paycheck.date bill=bill.name %}"><i class="material-icons">delete</i></a></li></td>
+            <td>
+              <p>
+                <input type="checkbox" />
+                <span></span>
+              </p>
+              </td>
+          </tr>
+        {% endfor %}
+
+        </table>
+        <table class="collection">
+          <tr>
+            <th>Bills Total</th>
+            <th>Ammount In Bank</th>
+            <th>Balance</th>
+          </tr>
+          <tr>
+            <td id="bills-total">${{paycheck.bills_total}}  </td>
+            <td id="ammount-in-bank">${{paycheck.ammount}}</td>
+            <td id="balance">${{paycheck.balance}}</td>
+          </tr>
+        </table>
+
+
+
+
+        <div class="card-action">
+          <!-- Modal Trigger -->
+          <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Add Bill</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endfor %}
