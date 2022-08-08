@@ -7,6 +7,7 @@ class Bill(models.Model):
     name = models.CharField(primary_key=True, max_length=20)
     ammount = models.DecimalField(max_digits=6, decimal_places=2)
     due_date = models.DateField()
+    paid = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

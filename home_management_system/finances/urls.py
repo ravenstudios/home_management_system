@@ -13,5 +13,6 @@ urlpatterns = [
     path('delete_paycheck/<str:name>/<path:date>', views.delete_paycheck, name='delete_paycheck'),
     path('add_bill_to_paycheck/<str:name>/<path:date>', views.add_bill_to_paycheck, name='add_bill_to_paycheck'),
     path('update_money_in_bank/<str:name>/<path:date>', views.update_money_in_bank, name='update_money_in_bank'),
+    path('pay_bill/<str:name>/<path:date>/<str:bill><path:paid>', views.pay_bill, name='pay_bill'),
 
 ]

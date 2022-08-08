@@ -20,7 +20,7 @@
             <td>
               <p>
                 <label>
-                  <input type="checkbox" class="filled-in"  />
+                  {{paybill}}
                   <span></span>
                 </label>
               </p>

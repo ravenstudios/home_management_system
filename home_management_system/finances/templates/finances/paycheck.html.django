@@ -39,11 +39,18 @@
 
             <td><a class="btn-floating blue btn-small" href="{% url 'finances:delete_bill_from_paycheck' name=paycheck.name date=paycheck.date bill=bill.name %}"><i class="material-icons">delete</i></a></li></td>
             <td>
-              <p>
-                <input type="checkbox" />
-                <span></span>
-              </p>
-              </td>
+              <label>
+                  {% csrf_token %}
+                  <p>
+                    <label>
+                      {% if bill.paid == True %}
+                      <a class="btn-floating green btn-small" href="{% url 'finances:pay_bill' name=paycheck.name date=paycheck.date bill=bill.name paid=0%}"><i class="material-icons">verified</i></a>
+                      {% else %}
+                      <a class="btn-floating red btn-small" href="{% url 'finances:pay_bill' name=paycheck.name date=paycheck.date bill=bill.name paid=1%}"><i class="material-icons">paid</i></a>
+                      {% endif %}
+                    </label>
+                  </p>
+            </td>
           </tr>
         {% endfor %}
 

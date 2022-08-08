@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from .models import Bill, Paycheck
 from django import forms
-from django.forms.widgets import DateInput, NumberInput
+from django.forms.widgets import DateInput, NumberInput,CheckboxInput
 
 class CreateNewBill(ModelForm):
     name = forms.CharField(required=False)
@@ -35,3 +35,19 @@ class UpdateBill(ModelForm):
     class Meta:
         model = Bill
         fields = ["ammount"]
+
+
+class PayBill(ModelForm):
+    # paid = forms.BooleanField()
+    paid = forms.BooleanField(
+                              required = False,
+                              widget=forms.widgets.CheckboxInput(attrs={'onclick':'this.form.submit();'}),
+                              help_text = "Pa",
+                              )
+    # paid = forms.BooleanField(widget=forms.CheckboxInput(attrs={'onclick':'this.form.submit();'}),required=False, label="Status")
+    class Meta:
+        model = Bill
+        fields = ["paid"]
+        # widgets = {
+        #     'is_anything_required' : CheckboxInput(attrs={'class': 'required checkbox form-control'}),
+        # }
