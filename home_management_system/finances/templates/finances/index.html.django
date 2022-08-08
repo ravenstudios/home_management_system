@@ -34,18 +34,7 @@
 
 
 
-      <div class="row">
 
-        <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Drop Me!</a>
-
-<!-- Dropdown Structure -->
-        <ul id='dropdown1' class='dropdown-content'>
-          {% for bill in bills %}
-            <li>{{bill}}</li>
-          {% endfor %}
-
-        </ul>
-      </div>
 
 
 

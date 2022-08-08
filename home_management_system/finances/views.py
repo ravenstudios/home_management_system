@@ -35,15 +35,15 @@ def index(request):
 
 
 def pay_bill(request, name, date, bill, paid):
-    print(f"paid {paid}")
+    print(request.get_full_path())
 
     paycheck = Paycheck.objects.get(name=name, date=date)
     bill = paycheck.bills.get(name=bill)
 
-    if paid == "0":
+    if paid == "False":
         print("paid")
         bill.paid = False
-    if paid == "1":
+    if paid == "True":
         print("not paid")
         bill.paid = True
     bill.save()
@@ -74,14 +74,18 @@ def create_new_paycheck(request):
 
 
 
-def add_bill_to_paycheck(request, name, date):
-    if request.POST:
-        bill_name = request.POST.getlist('bill', None)
-        bill = Bill.objects.get(name=bill_name[0])
-        paycheck = Paycheck.objects.get(name=name, date=date)
-        paycheck.bills.add(bill)
+def add_bill_to_paycheck(request, paycheck_name, paycheck_date, bill_name, bill_ammount, bill_date):
+    print(request.get_full_path())
+    # if request.POST:
 
-        update_values(paycheck)
+    paycheck = Paycheck.objects.get(name=paycheck_name, date=paycheck_date)
+    bill = Bill(name=bill_name, ammount=bill_ammount, due_date=bill_date)
+    print(f"bill: {bill.paid}")
+    bill.save()
+    paycheck.bills.add(bill)
+    print(paycheck)
+    update_values(paycheck)
+
     return redirect('/finances/')
 
 
@@ -120,9 +124,11 @@ def update_money_in_bank(request, name, date):
 
 def update_values(paycheck):
     bills_total = 0
-    for bill in paycheck.bills.all():
-        if not bill.paid:
-            bills_total += bill.ammount
+    bills = paycheck.bills.all()
+    if paycheck.bills.all():
+        for bill in paycheck.bills.all():
+            if not bill.paid:
+                bills_total += bill.ammount
 
     paycheck.bills_total = bills_total
     paycheck.balance = paycheck.ammount - paycheck.bills_total
