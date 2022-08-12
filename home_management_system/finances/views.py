@@ -52,6 +52,13 @@ def pay_bill(request, name, date, bill, paid):
             # print(bill.paid)
     return redirect('/finances/')
 
+def update_bill(request):
+    # print(request.get_full_path())
+    if request.POST:
+        form = CreateNewBill(request.POST)
+        if form.is_valid():
+            form.save()
+    return redirect('/finances/')
 
 
 def create_new_bill(request):

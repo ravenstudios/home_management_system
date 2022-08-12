@@ -27,17 +27,39 @@
             <th class="collection-item">Ammount</th>
             <th class="collection-item">Due Date</th>
             <th class="collection-item">Delete</th>
+            <th class="collection-item">Edit</th>
             <th class="collection-item">Paid</th>
           </tr>
 
         {% for bill in paycheck.bills.all %}
 
           <tr>
+
             <td class="collection-item">{{bill.name}}</td>
             <td class="collection-item">{{bill.ammount}}</td>
             <td class="collection-item">{{bill.due_date|date:'M-d'}}</td>
 
-            <td><a class="btn-floating blue btn-small" href="{% url 'finances:delete_bill_from_paycheck' name=paycheck.name date=paycheck.date bill=bill.name %}"><i class="material-icons">delete</i></a></li></td>
+            <td><a class="btn-floating red btn-small" href="{% url 'finances:delete_bill_from_paycheck' name=paycheck.name date=paycheck.date bill=bill.name %}"><i class="material-icons">delete</i></a></li></td>
+            <td>
+
+              <a class="btn-floating blue btn-small modal-trigger" href="#edit_bill_modal_{{bill.name}}">
+                <i class="material-icons">edit</i>
+              </a>
+              <div id="edit_bill_modal_{{bill.name}}" class="modal modal-fixed-footer">
+                <div class="modal-content">
+
+                  <form method="POST" action="{% url 'finances:update_bill'  %}"  enctype="multipart/form-data">
+                  {% csrf_token %}
+                    <fieldset>
+                      <legend><h5>Edit {{bill.name}} Bill</h5></legend>
+
+                      {{update_bill.as_p}}
+                      <input type="submit" name="" value="OK">
+                    </fieldset>
+                  </form>
+                </div>
+              </div>
+            </td>
             <td>
               <label>
                   {% csrf_token %}
@@ -52,6 +74,7 @@
                   </p>
             </td>
           </tr>
+
         {% endfor %}
 
         </table>
@@ -73,10 +96,10 @@
 
         <div class="card-action">
           <!-- Modal Trigger -->
-          <a class="waves-effect waves-light btn modal-trigger" href="#modal_add_paycheck">Add Bill</a>
+          <a class="waves-effect waves-light btn modal-trigger" href="#modal_add_paycheck_{{paycheck.name}}_{{paycheck.date}}">Add Bill</a>
         </div>
 
-        <div id="modal_add_paycheck" class="modal modal-fixed-footer">
+        <div id="modal_add_paycheck_{{paycheck.name}}_{{paycheck.date}}" class="modal modal-fixed-footer">
           <div class="modal-content">
             <table>
               <tr>
@@ -102,8 +125,13 @@
                     </td>
 
                     <td><a class="btn-floating blue btn-small"href="{% url 'finances:add_bill_to_paycheck'  paycheck_name=paycheck.name paycheck_date=paycheck.date bill_name=bill.name bill_ammount=bill.ammount bill_date=bill.due_date  %}"><i class="material-icons">add</i></a></li></td>
-                    <td><a class="btn-floating blue btn-small"href="{% url 'finances:delete_bill' name=bill.name   %}"><i class="material-icons">edit</i></a></li></td>
-                    <td><a class="btn-floating blue btn-small"href="{% url 'finances:delete_bill' name=bill.name   %}"><i class="material-icons">delete</i></a></li></td>
+                    <td><a class="btn-floating blue btn-small"href="{% url 'finances:delete_bill' name=bill.name   %}"></a></li></td>
+                    <td>
+                      <a class="btn-floating blue btn-small modal-trigger" href="#edit_bill_modal_{{bill.name}}">
+                        <i class="material-icons">edit</i>
+                      </a>
+
+                    </td>
 
 
                   </tr>
@@ -115,5 +143,5 @@
       </div>
     </div>
   </div>
-
+</div>
 {% endfor %}

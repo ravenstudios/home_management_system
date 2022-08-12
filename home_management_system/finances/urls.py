@@ -14,5 +14,6 @@ urlpatterns = [
     path('add_bill_to_paycheck/<str:paycheck_name>/<str:paycheck_date>/<str:bill_name>/<str:bill_ammount>/<path:bill_date>', views.add_bill_to_paycheck, name='add_bill_to_paycheck'),
     path('update_money_in_bank/<str:name>/<path:date>', views.update_money_in_bank, name='update_money_in_bank'),
     path('pay_bill/<str:name>/<path:date>/<str:bill>/<str:paid>', views.pay_bill, name='pay_bill'),
+    path('update_bill', views.update_bill, name='update_bill'),
 
 ]

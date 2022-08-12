@@ -31,10 +31,12 @@ class UpdateMoneyInBank(ModelForm):
 
 
 class UpdateBill(ModelForm):
-    ammount = forms.DecimalField(label="Ammount", max_digits=6, decimal_places=2)
+    name = forms.CharField(required=False)
+    ammount = forms.IntegerField(required=False)
+    due_date = forms.DateField(widget=NumberInput(attrs={'type': 'date'}))
     class Meta:
         model = Bill
-        fields = ["ammount"]
+        fields = ["name", "ammount", "due_date"]
 
 
 class PayBill(ModelForm):
