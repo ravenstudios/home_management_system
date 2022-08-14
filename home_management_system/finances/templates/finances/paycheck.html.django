@@ -112,7 +112,25 @@
           </tr>
           <tr>
             <td id="bills-total">${{paycheck.bills_total}}  </td>
-            <td id="ammount-in-bank">${{paycheck.ammount}}</td>
+            <td id="ammount-in-bank">
+              ${{paycheck.ammount_in_bank}}
+              <a class="btn-floating green btn-small modal-trigger" href="#edit_money_in_bank_modal_{{paycheck.id}}">
+                <i class="material-icons">edit</i>
+              </a>
+              <div id="edit_money_in_bank_modal_{{paycheck.id}}" class="modal modal-fixed-footer">
+                <div class="modal-content">
+
+                  <form method="POST" action="{% url 'finances:update_money_in_bank' paycheck_id=paycheck.id %}"  enctype="multipart/form-data">
+                  {% csrf_token %}
+                    <fieldset>
+                      <legend><h5>Edit Bank</h5></legend>
+                        <input type="text" name="ammount_in_bank" value="{{paycheck.ammount}}">
+                      <input type="submit" name="" value="OK">
+                    </fieldset>
+                  </form>
+                </div>
+              </div>
+            </td>
             <td id="balance">${{paycheck.balance}}</td>
           </tr>
         </table>

@@ -150,8 +150,8 @@ def delete_bill(request, bill_id):
 
 def update_money_in_bank(request, paycheck_id):
     paycheck = Paycheck.objects.get(id=paycheck_id)
-    money_in_bank_ammount = request.POST.get("paycheck.ammount_in_bank")
-    paycheck.save(update_fields=['ammount_in_bank'])
+    paycheck.ammount_in_bank = request.POST.get("ammount_in_bank")
+    paycheck.save()
     update_values(paycheck)
     return redirect('/finances/')
 
@@ -165,6 +165,6 @@ def update_values(paycheck):
                 bills_total += bill.ammount
 
     paycheck.bills_total = bills_total
-    paycheck.balance = paycheck.ammount - paycheck.bills_total
+    paycheck.balance = paycheck.ammount_in_bank - paycheck.bills_total
     paycheck.save(update_fields=['bills_total', 'balance'])
     return bills_total
