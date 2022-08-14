@@ -11,10 +11,30 @@
               <td>${{paycheck.ammount}}</td>
               <td>{{paycheck.date|date:'M-d'}}</td>
               <td>
-                <a class="btn-floating blue btn-small"href="{% url 'finances:delete_paycheck' paycheck_id=paycheck.id  %}"><i class="material-icons">edit</i></a></li>
+                <a class="btn-floating blue btn-small modal-trigger"href="#edit_paycheck_modal_{{paycheck.id}}">
+                  <i class="material-icons">edit</i>
+                </a>
+                <div id="edit_paycheck_modal_{{paycheck.id}}" class="modal modal-fixed-footer">
+                  <div class="modal-content">
+
+                    <form method="POST" action="{% url 'finances:edit_paycheck' paycheck_id=paycheck.id %}"  enctype="multipart/form-data">
+                    {% csrf_token %}
+                      <fieldset>
+                        <legend><h5>Edit {{paycheck.name}} Paycheck</h5></legend>
+
+                          <input type="text" name="name" value="{{paycheck.name}}">
+                          <input type="text" name="ammount" value="{{paycheck.ammount}}">
+                          <input type="date" name="date" value="{{paycheck.date}}">
+                        <input type="submit" name="" value="OK">
+                      </fieldset>
+                    </form>
+                  </div>
+                </div>
               </td>
               <td>
-                <a class="btn-floating blue btn-small"href="{% url 'finances:delete_paycheck' paycheck_id=paycheck.id  %}"><i class="material-icons">delete</i></a></li>
+                <a class="btn-floating red btn-small"href="{% url 'finances:delete_paycheck' paycheck_id=paycheck.id  %}">
+                  <i class="material-icons">delete</i>
+                </a>
               </td>
             </tr>
           </table>

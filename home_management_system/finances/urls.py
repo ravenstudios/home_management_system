@@ -15,5 +15,7 @@ urlpatterns = [
     path('update_money_in_bank/<str:paycheck_id>', views.update_money_in_bank, name='update_money_in_bank'),
     path('pay_bill/<str:paycheck_id>/<str:bill_id>/<str:paid>', views.pay_bill, name='pay_bill'),
     path('update_bill/<str:bill_id>', views.update_bill, name='update_bill'),
+    path('edit_paycheck/<str:paycheck_id>', views.edit_paycheck, name='edit_paycheck'),
+
 
 ]

@@ -69,6 +69,25 @@ def update_bill(request, bill_id):
     return redirect('/finances/')
 
 
+
+def edit_paycheck(request, paycheck_id):
+    print(request.POST.get("name"))
+    name = request.POST.get("name")
+    ammount = request.POST.get("ammount")
+    date = request.POST.get("date")
+    paycheck = Paycheck.objects.get(id=paycheck_id)
+    paycheck.name = name
+    paycheck.ammount = ammount
+    paycheck.date = date
+    paycheck.save()
+    if request.POST:
+        form = CreateNewBill(request.POST)
+        if form.is_valid():
+            form.save()
+    return redirect('/finances/')
+
+
+
 def create_new_bill(request):
     if request.POST:
         form = CreateNewBill(request.POST)
