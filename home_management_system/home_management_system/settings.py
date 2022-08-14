@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'hms.apps.HmsConfig',
     'finances.apps.FinancesConfig',
     "django_browser_reload",
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +73,8 @@ TEMPLATES = [
         },
     },
 ]
+
+LOGIN_REDIRECT_URL = "/"
 
 WSGI_APPLICATION = 'home_management_system.wsgi.application'
 

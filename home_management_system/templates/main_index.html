@@ -1,12 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
+  {% load static %}
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %} Hello World {% endblock title %}</title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'finances/css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static 'finances/css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
   </head>
+
   <body>
-    {% block content %}{% endblock content %}
+
+    <nav class="light-blue lighten-1" role="navigation">
+      <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Home Management System</a>
+        {% block header %}{% endblock header %}
+      </div>
+    </nav>
+
+    <div class="section no-pad-bot" id="index-banner">
+      <div class="container">
+        {% block content %}{% endblock content %}
+      </div>
+  </div>
+
+  <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <script src="{% static 'finances/js/materialize.js' %}"></script>
+    <script src="{% static 'finances/js/init.js' %}"></script>
+    <script src="{% static 'finances/js/js.js' %}"></script>
+
   </body>
 </html>
