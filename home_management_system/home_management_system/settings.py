@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'finances.apps.FinancesConfig',
     "django_browser_reload",
     'accounts.apps.AccountsConfig',
+    'shopping_list.apps.ShoppingListConfig',
 ]
 
 MIDDLEWARE = [

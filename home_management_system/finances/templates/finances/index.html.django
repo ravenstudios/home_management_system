@@ -1,4 +1,4 @@
-{# {% extends "main_index.html" %} #}
+{% extends "main_index.html" %}
 {% load static %}
 
 
@@ -14,8 +14,7 @@
 
 <body>
 
-  <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Finances</a>
+  {% block header %}
       <ul class="right hide-on-med-and-down">
         <li>
           <a class=" blue  modal-trigger"href="#create_new_paycheck_modal">
@@ -56,29 +55,23 @@
               </form>
             </div>
           </div>
-
-
         </li>
       </ul>
 
-
-      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-    </div>
-  </nav>
+{% endblock header %}
+{% block content %}
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
-      <br><br>
-
       <div class="row">
         <div class="col s12">
           <ul class="collapsible">
             {% include 'finances/paycheck.html.django' %}
           </ul>
+        </div>
       </div>
-
-
-
-
+    </div>
+  </div>
+{% endblock content %}
 
 
 

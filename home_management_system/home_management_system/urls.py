@@ -6,6 +6,7 @@ urlpatterns = [
     path('hms/', include('hms.urls')),
     path('finances/', include('finances.urls')),
     path('accounts/', include('accounts.urls')),
+    path('shopping_list/', include('shopping_list.urls')),
     path('admin/', admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
 

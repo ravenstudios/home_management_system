@@ -16,7 +16,20 @@
   <body>
 
     <nav class="light-blue lighten-1" role="navigation">
-      <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Home Management System</a>
+      <div class="nav-wrapper container"><a id="logo-container" href="{% url 'hms:index' %}" class="brand-logo">Home Management System</a>
+        <ul id="dropdown1" class="dropdown-content">
+          <li><a href="#!">Logout</a></li>
+          <li><a href="#!">two</a></li>
+          <li class="divider"></li>
+          <li><a href="#!">three</a></li>
+        </ul>
+
+            <ul class="right hide-on-med-and-down">
+              <li><a href="{% url 'finances:index' %}">Finances</a></li>
+              <li><a href="{% url 'shopping_list:index' %}">Shopping List</a></li>
+              <!-- Dropdown Trigger -->
+              <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+            </ul>
         {% block header %}{% endblock header %}
       </div>
     </nav>

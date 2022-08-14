@@ -10,7 +10,5 @@ def index(request):
     return render(request, 'hms/index.html.django', context)
 
 
-def view2(request):
-    return HttpResponse("so gimme da views")
 
 # Create your views here.

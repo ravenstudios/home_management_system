@@ -1,0 +1,11 @@
+{% extends "main_index.html" %}
+{% load static %}
+
+
+{% block header %}
+{% endblock header %}
+
+
+{% block content %}
+<h1>Shopping List</h1>
+{% endblock content %}
