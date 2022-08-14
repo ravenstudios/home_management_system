@@ -34,11 +34,11 @@ def index(request):
     return render(request, 'finances/index.html.django', context)
 
 
-def pay_bill(request, name, date, bill, paid):
+def pay_bill(request, paycheck_id, bill_id, paid):
     print(request.get_full_path())
 
-    paycheck = Paycheck.objects.get(name=name, date=date)
-    bill = paycheck.bills.get(name=bill)
+    paycheck = Paycheck.objects.get(id=paycheck_id)
+    bill = paycheck.bills.get(id=bill_id)
 
     if paid == "False":
         print("paid")
@@ -52,12 +52,20 @@ def pay_bill(request, name, date, bill, paid):
             # print(bill.paid)
     return redirect('/finances/')
 
-def update_bill(request):
-    # print(request.get_full_path())
-    if request.POST:
-        form = CreateNewBill(request.POST)
-        if form.is_valid():
-            form.save()
+def update_bill(request, bill_id):
+    print(bill_id)
+    name = request.POST.get("name")
+    ammount = request.POST.get("ammount")
+    date = request.POST.get("date")
+    bill = Bill.objects.get(id=bill_id)
+    bill.name = name
+    bill.ammount = ammount
+    bill.due_date = date
+    bill.save()
+    # if request.POST:
+    #     form = CreateNewBill(request.POST)
+    #     if form.is_valid():
+    #         form.save()
     return redirect('/finances/')
 
 
@@ -81,14 +89,14 @@ def create_new_paycheck(request):
 
 
 
-def add_bill_to_paycheck(request, paycheck_name, paycheck_date, bill_name, bill_ammount, bill_date):
+def add_bill_to_paycheck(request, paycheck_id, bill_id):
     print(request.get_full_path())
     # if request.POST:
 
-    paycheck = Paycheck.objects.get(name=paycheck_name, date=paycheck_date)
-    bill = Bill(name=bill_name, ammount=bill_ammount, due_date=bill_date)
+    paycheck = Paycheck.objects.get(id=paycheck_id)
+    bill = Bill.objects.get(id=bill_id)
     print(f"bill: {bill.paid}")
-    bill.save()
+    # bill.save()
     paycheck.bills.add(bill)
     print(paycheck)
     update_values(paycheck)
@@ -97,9 +105,9 @@ def add_bill_to_paycheck(request, paycheck_name, paycheck_date, bill_name, bill_
 
 
 
-def delete_bill_from_paycheck(request, name, date, bill):
-    paycheck = Paycheck.objects.get(name=name, date=date)
-    bill = Bill.objects.get(name=bill)
+def delete_bill_from_paycheck(request, paycheck_id, bill_id):
+    paycheck = Paycheck.objects.get(id=paycheck_id)
+    bill = Bill.objects.get(id=bill_id)
     paycheck.bills.remove(bill)
 
     update_values(paycheck)
@@ -108,21 +116,21 @@ def delete_bill_from_paycheck(request, name, date, bill):
 
 
 
-def delete_paycheck(request, name, date):
-    paycheck = Paycheck.objects.get(name=name, date=date)
+def delete_paycheck(request, paycheck_id):
+    paycheck = Paycheck.objects.get(id=paycheck_id)
     paycheck.delete()
     return redirect('/finances/')
 
 
-def delete_bill(request, name):
-    bill = Bill.objects.get(name=name)
+def delete_bill(request, bill_id):
+    bill = Bill.objects.get(id=bill_id)
     bill.delete()
     return redirect('/finances/')
 
 
 
-def update_money_in_bank(request, name, date):
-    paycheck = Paycheck.objects.get(name=name, date=date)
+def update_money_in_bank(request, paycheck_id):
+    paycheck = Paycheck.objects.get(id=paycheck_id)
     money_in_bank_ammount = request.POST.get("paycheck.ammount_in_bank")
     paycheck.save(update_fields=['ammount_in_bank'])
     update_values(paycheck)

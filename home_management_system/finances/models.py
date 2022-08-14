@@ -2,7 +2,6 @@ from django.db import models
 
 
 class Bill(models.Model):
-    id = models.AutoField(primary_key=True, default=0)
     name = models.CharField(max_length=20, default="BILL")
     ammount = models.DecimalField(max_digits=6, decimal_places=2)
     due_date = models.DateField()
@@ -14,7 +13,6 @@ class Bill(models.Model):
 
 
 class Paycheck(models.Model):
-    id = models.AutoField(primary_key=True, default=0)
     name = models.CharField(max_length=20, default=0)
     ammount = models.DecimalField(max_digits=6, decimal_places=2, default=0)
     ammount_in_bank = models.DecimalField(default=0, max_digits=6, decimal_places=2)
