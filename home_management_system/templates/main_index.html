@@ -29,6 +29,8 @@
               <li><a href="{% url 'shopping_list:index' %}">Shopping List</a></li>
               <!-- Dropdown Trigger -->
               <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+
+              <li>{{user}}</li>
             </ul>
         {% block header %}{% endblock header %}
       </div>

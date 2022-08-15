@@ -5,8 +5,12 @@ from .models import Paycheck, Bill
 from django.shortcuts import redirect
 from .forms import CreateNewBill, CreateNewPaycheck, UpdateMoneyInBank, UpdateBill, PayBill
 from django.db.models import Sum
+from django.contrib.auth.decorators import login_required
 
 
+
+@login_required
+# @user_passes_test(not_in_student_group, login_url='/advising/denied/')
 def index(request):
     create_new_bill = CreateNewBill(request.POST)
     create_new_paycheck = CreateNewPaycheck(request.POST)
