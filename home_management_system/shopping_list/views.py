@@ -5,8 +5,11 @@ from .models import Item, List
 from django.shortcuts import redirect
 from .forms import CreateNewItem, CreateNewList
 from django.db.models import Sum
+from django.contrib.auth.decorators import login_required
 
 
+
+@login_required
 def index(request):
     create_new_item = CreateNewItem(request.POST)
     create_new_list = CreateNewList(request.POST)

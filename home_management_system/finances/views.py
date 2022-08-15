@@ -6,11 +6,12 @@ from django.shortcuts import redirect
 from .forms import CreateNewBill, CreateNewPaycheck, UpdateMoneyInBank, UpdateBill, PayBill
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
 
 
 
 @login_required
-# @user_passes_test(not_in_student_group, login_url='/advising/denied/')
+@user_passes_test(lambda u: u.is_superuser)
 def index(request):
     create_new_bill = CreateNewBill(request.POST)
     create_new_paycheck = CreateNewPaycheck(request.POST)
