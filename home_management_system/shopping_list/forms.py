@@ -5,16 +5,14 @@ from django.forms.widgets import DateInput, NumberInput,CheckboxInput
 
 class CreateNewItem(ModelForm):
     name = forms.CharField()
-    note = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}))
-    date = forms.DateField(widget=NumberInput(attrs={'type': 'date'}))
+    note = forms.CharField()
     class Meta:
         model = Item
-        fields = ["name", "note", "date"]
+        fields = ["name", "note"]
 
 class CreateNewList(ModelForm):
     name = forms.CharField()
-    note = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}))
-    date = forms.DateField(widget=NumberInput(attrs={'type': 'date'}))
+    note = forms.CharField()
     class Meta:
         model = List
-        fields = ["name", "note", "date"]
+        fields = ["name", "note"]

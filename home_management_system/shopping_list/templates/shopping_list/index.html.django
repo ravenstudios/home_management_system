@@ -38,17 +38,15 @@
 
       <table>
         <tr>
-          <th>Name</th>
-          <th>Note</th>
-          <th>Date</th>
-          <th>Edit</th>
-          <th>Delete</th>
+          <th>List Name</th>
+          <th>List Note</th>
+          <th>Edit List</th>
+          <th>Delete List</th>
           <th>Add New Item</th>
         </tr>
         <tr>
           <th>{{list.name}}</th>
           <th>{{list.note}}</th>
-          <th>{{list.date}}</th>
           <th>
             <a class="btn-floating blue btn-small modal-trigger" href="#edit_list_{{list.id}}">
               <i class="material-icons">edit</i>
@@ -63,7 +61,7 @@
 
                       <input type="text" name="name" value="{{list.name}}">
                       <input type="text" name="note" value="{{list.note}}">
-                      <input type="date" name="date" value="{{list.date}}">
+
                     <input type="submit" name="" value="OK">
                   </fieldset>
                 </form>
@@ -86,10 +84,8 @@
                 {% csrf_token %}
                   <fieldset>
                     <legend><h5>Add New Item</h5></legend>
-                    <input type="text" name="name" value="">
-                    <textarea  name="note" rows="4" cols="50">
-                    </textarea>
-                    <input type="date" name="date" value="">
+                    <input type="text" name="name" value="" label="asdf">
+                    <input type="text" name="note" value="">
                     <input type="submit" name="" value="OK">
                   </fieldset>
                 </form>
@@ -98,12 +94,18 @@
             </div>
           </th>
         </tr>
-
+        <tr>
+          <tr>
+            <th>Item Name</th>
+            <th>Item Note</th>
+            <th>Edit Item</th>
+            <th>Delete Item</th>
+          </tr>
+        </tr>
         {% for item in list.items.all %}
           <tr>
             <td>{{item.name}}</td>
             <td>{{item.note}}</td>
-            <td>{{item.date}}</td>
             <th>
               <a class="btn-floating blue btn-small modal-trigger" href="#edit_item_{{item.id}}">
                 <i class="material-icons">edit</i>
@@ -118,7 +120,6 @@
 
                         <input type="text" name="name" value="{{item.name}}">
                         <input type="text" name="note" value="{{item.note}}">
-                        <input type="date" name="date" value="{{item.date}}">
                       <input type="submit" name="" value="OK">
                     </fieldset>
                   </form>
