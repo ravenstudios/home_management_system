@@ -47,6 +47,7 @@
         <tr>
           <th>{{list.name}}</th>
           <th>{{list.note}}</th>
+
           <th>
             <a class="btn-floating blue btn-small modal-trigger" href="#edit_list_{{list.id}}">
               <i class="material-icons">edit</i>
@@ -86,6 +87,12 @@
                     <legend><h5>Add New Item</h5></legend>
                     <input type="text" name="name" value="" label="asdf">
                     <input type="text" name="note" value="">
+
+                    <select name="family_members" id="family_members_select">
+                      {% for  member in family_members%}
+                      <option value="{{member.name}}">{{member.name}}</option>
+                      {% endfor %}
+                    </select>
                     <input type="submit" name="" value="OK">
                   </fieldset>
                 </form>
@@ -98,6 +105,7 @@
           <tr>
             <th>Item Name</th>
             <th>Item Note</th>
+            <th>Requested From</th>
             <th>Edit Item</th>
             <th>Delete Item</th>
           </tr>
@@ -106,6 +114,8 @@
           <tr>
             <td>{{item.name}}</td>
             <td>{{item.note}}</td>
+            <td><img src="{{item.requested_from.image.url}}" width="75" alt=""></td>
+
             <th>
               <a class="btn-floating blue btn-small modal-trigger" href="#edit_item_{{item.id}}">
                 <i class="material-icons">edit</i>

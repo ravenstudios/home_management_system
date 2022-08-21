@@ -23,13 +23,27 @@
               <li><a href="{% url 'finances:index' %}">Finances</a></li>
               <li><a href="{% url 'shopping_list:index' %}">Shopping List</a></li>
               <!-- Dropdown Trigger -->
-              <li><a class="dropdown-trigger" href="#!" data-target="user_dropdown">{{user}}<i class="material-icons right">arrow_drop_down</i></a></li>
+
+
+
+              <li>
+                <a class="dropdown-trigger" href="#!" data-target="user_dropdown">
+                  <p>User</p>
+                  <p>{{user.avatar}}</p>
+                  <img src="{{user.avatar}}" alt="">
+                </a>
+              </li>
+
+
+
               <ul id="user_dropdown" class="dropdown-content">
+                <li>{{user.username}}</li>
                 <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
 
               </ul>
 
             </ul>
+
         {% block header %}{% endblock header %}
 
       </div>
@@ -37,6 +51,9 @@
 
     <div class="section no-pad-bot" id="index-banner">
       <div class="container">
+        <h1>{{ user.username}}</h1>
+        <img class="rounded-circle account-img" src="{{ user.profile.get_image.url }}" alt="hhsdfhsdflll">
+
         {% block content %}{% endblock content %}
       </div>
   </div>

@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from .forms import CreateNewItem, CreateNewList
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
-
+from accounts.models import FamilyMember
 
 
 @login_required
@@ -15,12 +15,13 @@ def index(request):
     create_new_list = CreateNewList(request.POST)
     items = Item.objects.all()
     lists = List.objects.all()
-
+    family_members = FamilyMember.objects.all()
     context={
         "create_new_item": create_new_item,
         "create_new_list": create_new_list,
         "items": items,
         "lists": lists,
+        "family_members": family_members,
         }
     return render(request, 'shopping_list/index.html.django', context)
 
@@ -94,7 +95,11 @@ def add_item_to_list(request, list_id):
     name = request.POST.get("name")
     note = request.POST.get("note")
     date = request.POST.get("date")
-    item = Item.objects.create(name=name, note=note)
+    requested_from_name = request.POST.get("family_members")
+    print(f"fm: {requested_from_name}")
+    requested_from = FamilyMember.objects.get(name=requested_from_name)
+
+    item = Item.objects.create(name=name, note=note, requested_from=requested_from)
     list.items.add(item)
 
 
