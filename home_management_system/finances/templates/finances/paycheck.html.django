@@ -1,4 +1,10 @@
 
+{% load static %}
+
+
+
+
+
 {% for paycheck in paychecks %}
 
   <li>

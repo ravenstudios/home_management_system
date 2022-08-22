@@ -9,5 +9,11 @@
 
 
 {% block content %}
-<h1>Home Management System</h1>
+<h1>HMS</h1>
+
+
+
+
+
+
 {% endblock content %}

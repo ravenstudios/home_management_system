@@ -1,0 +1,74 @@
+
+{% extends "main_index.html" %}
+{% block title %}Home Management System{% endblock title %}
+
+
+{% block header%}
+
+
+{% endblock header %}
+
+
+{% block content %}
+<h1>Messenger</h1>
+
+
+<div class="row">
+  <div class="col s12 m6 l6">
+    <div class="card horizontal blue-grey darken-1">
+        <div class="card-content white-text">
+          <table>
+            <tr>
+              <th>Title</th>
+              <th>Message</th>
+              <th>From</th>
+              <th>For</th>
+              <th>Update</th>
+            </tr>
+
+            {% for message in messages %}
+            <tr>
+              <td><h4>{{message.title}}</h4></td>
+              <td><p>{{message.msg}}</p></td>
+              <td><p>{{message.msg_author}}</p></td>
+              <td><img src="{{message.msg_recipient.image.url}}" width="60" alt=""></td>
+              <td>
+                <a class="btn-floating blue btn-small modal-trigger"href="#update_message_modal_{{message.id}}">
+                  <i class="material-icons">edit</i>
+                </a>
+                <div id="update_message_modal_{{message.id}}" class="modal modal-fixed-footer">
+                  <div class="modal-content">
+
+                    <form method="POST" action="{% url 'messenger:update_message' message_id=message.id %}"  enctype="multipart/form-data">
+                    {% csrf_token %}
+                      <fieldset>
+                        <legend><h5>Update {{message.title}} </h5></legend>
+                        {{update_message.as_p}}
+
+                        <input type="submit" name="" value="OK">
+                      </fieldset>
+                    </form>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+
+
+          </table>
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock content %}

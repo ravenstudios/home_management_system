@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "django_browser_reload",
     'accounts.apps.AccountsConfig',
     'shopping_list.apps.ShoppingListConfig',
+    'messenger.apps.MessengerConfig',
+
 ]
 
 MIDDLEWARE = [

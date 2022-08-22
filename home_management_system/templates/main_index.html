@@ -20,39 +20,26 @@
 
 
             <ul class="right hide-on-med-and-down">
+              <li><a href="{% url 'hms:index' %}">Home</a></li>
               <li><a href="{% url 'finances:index' %}">Finances</a></li>
               <li><a href="{% url 'shopping_list:index' %}">Shopping List</a></li>
+              <li><a href="{% url 'messenger:index' %}">Messenger</a></li>
               <!-- Dropdown Trigger -->
 
 
 
-              <li>
-                <a class="dropdown-trigger" href="#!" data-target="user_dropdown">
-                  <p>User</p>
-                  <p>{{user.avatar}}</p>
-                  <img src="{{user.avatar}}" alt="">
-                </a>
-              </li>
 
-
-
-              <ul id="user_dropdown" class="dropdown-content">
-                <li>{{user.username}}</li>
-                <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
-
-              </ul>
 
             </ul>
 
-        {% block header %}{% endblock header %}
+
 
       </div>
     </nav>
 
     <div class="section no-pad-bot" id="index-banner">
       <div class="container">
-        <h1>{{ user.username}}</h1>
-        <img class="rounded-circle account-img" src="{{ user.profile.get_image.url }}" alt="hhsdfhsdflll">
+
 
         {% block content %}{% endblock content %}
       </div>
