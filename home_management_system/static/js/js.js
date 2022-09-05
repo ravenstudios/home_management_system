@@ -5,4 +5,5 @@ $(()=>{
     fullWidth: true,
     indicators: true
   });
+  $('.collapsible').collapsible();
 })

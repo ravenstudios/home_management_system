@@ -17,6 +17,7 @@ def update_message(request, message_id):
     message.task_options = request.POST.get("task_options")
     message.time_updated = datetime.now()
     message.comments = request.POST.get("comments")
+    message.msg_author = request.POST.get("msg_author")
     message.save()
 
     return redirect('/messenger/')

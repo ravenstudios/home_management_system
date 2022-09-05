@@ -29,7 +29,7 @@
                 <a class="btn-floating green btn-small modal-trigger" href="#add_new_message_modal">
                   <i class="material-icons">add</i>
                 </a>
-                <div id="add_new_message_modal" class="modal modal-fixed-footer">
+                <div id="add_new_message_modal" class="modal modal-fixed-footer blue-grey darken-1">
                   <div class="modal-content">
                     <form method="POST" action="{% url 'messenger:add_new_message' %}"  enctype="multipart/form-data">
                     {% csrf_token %}
@@ -51,7 +51,7 @@
                 <a class="modal-trigger"href="#display_message_modal_{{message.id}}">
                   <h5>{{message.title}}</h5>
                 </a>
-                <div id="display_message_modal_{{message.id}}" class="modal modal-fixed-footer  teal lighten-2">
+                <div id="display_message_modal_{{message.id}}" class="modal modal-fixed-footer  blue-grey darken-1">
                   <div class="modal-content">
 
                     <div class="row">

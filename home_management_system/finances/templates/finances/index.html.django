@@ -10,17 +10,10 @@
 
 
 <div class="row">
-  {% include 'finances/paycheck.html.django' %}
+  <ul class="collapsible">
+    {% include 'finances/paycheck.html.django' %}
+  </ul>
 </div>
-
-
-
-
-
-
-
-
-
 
         <div class="row">
           <form method="POST" action="{% url 'finances:create_new_bill' %}"  enctype="multipart/form-data">
