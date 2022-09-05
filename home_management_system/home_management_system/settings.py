@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-+fszl80oqncr!eyxnrnflny#s(!znf3jrpql=2jq$*x9q$h0ui
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['naspi.local']
 
 
 # Application definition
