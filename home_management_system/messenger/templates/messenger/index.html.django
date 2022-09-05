@@ -53,21 +53,74 @@
                 </a>
                 <div id="display_message_modal_{{message.id}}" class="modal modal-fixed-footer  teal lighten-2">
                   <div class="modal-content">
-                    <table>
-                      <tr>
-                        <th><h5>Title</h5></th>
-                        <th><h5>Message</h5></th>
-                        <th><h5>From</h5></th>
-                        <th><h5>To</h5></th>
-                        <th><h5>Edit</h5></th>
-                        <th><h5>Delete</h5></th>
-                      </tr>
-                      <tr>
-                        <td><h5>{{message.title}}</h5></td>
-                        <td><h5>{{message.msg}}</h5></td>
-                        <td><h5>{{message.msg_author}}</h5></td>
-                        <td><h5>{{message.msg_recipient}}</h5></td>
-                        <td>
+
+                    <div class="row">
+                      <div class="col s6">
+                        <p class="blue-text text-darken-2">Title</p>
+                        <h4>{{message.title}}</h4>
+                      </div>
+                    </div>
+                    <div class="divider"></div>
+
+                    <div class="row">
+                      <div class="col s6">
+                        <p class="blue-text text-darken-2">Message</p>
+                        <h6>{{message.msg}}</h6>
+                      </div>
+                    </div>
+                    <div class="divider"></div>
+
+                    <div class="row">
+                      <div class="col s6">
+                        <p class="blue-text text-darken-2">From</p>
+                        <h6>{{message.msg_author}}</h6>
+                      </div>
+
+                    </div>
+                    <div class="divider"></div>
+
+                    <div class="row">
+                      <div class="col s6">
+                        <p class="blue-text text-darken-2">To</p>
+                        <h6>{{message.msg_recipient}}</h6>
+                      </div>
+                    </div>
+                    <div class="divider"></div>
+
+                    <div class="row">
+                      <div class="col s6">
+                        <p class="blue-text text-darken-2">Status</p>
+                        <h6>{{message.task_options}}</h6>
+                      </div>
+                    </div>
+                    <div class="divider"></div>
+
+                    <div class="row">
+                      <div class="col s6">
+                        <p class="blue-text text-darken-2">Created</p>
+                        <h6>{{message.time_created}}</h6>
+                      </div>
+                    </div>
+                    <div class="divider"></div>
+
+                    <div class="row">
+                      <div class="col s6">
+                        <p class="blue-text text-darken-2">Updated</p>
+                        <h6>{{message.time_updated}}</h6>
+                      </div>
+                    </div>
+                    <div class="divider"></div>
+
+
+
+
+
+
+
+                    <div class="card-action">
+
+                      <div class="row">
+                        <div class="col s6">
                           <a class="btn-floating blue btn-small modal-trigger"href="#update_message_modal_{{message.id}}">
                             <i class="material-icons">edit</i>
                           </a>
@@ -85,15 +138,19 @@
                               </form>
                             </div>
                           </div>
-                        </td>
-                        <td>
+                        </div>
+
+                        <div class="col s6">
                           <a class="btn-floating red btn-small " href="{% url 'messenger:delete_message' message_id=message.id%}">
                             <i class="material-icons">delete</i>
                           </a>
-                        </td>
-                      </tr>
-                    </table>
+                        </div>
 
+                      </div>
+
+
+
+                    </div>
 
                   </div>
                 </div>
