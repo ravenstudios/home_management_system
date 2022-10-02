@@ -15,26 +15,71 @@
   </ul>
 </div>
 
-        <div class="row">
-          <form method="POST" action="{% url 'finances:create_new_bill' %}"  enctype="multipart/form-data">
-          {% csrf_token %}
-            <fieldset>
-              <legend><h5>Create new bill</h5></legend>
-              {{create_new_bill}}
-              <input type="submit" value="Submit">
-            </fieldset>
-          </form>
+<div class="row">
+  <ul class="collapsible">
+    <li>
+      <div class="collapsible-header">
 
-          <br>
-          <form method="POST" action="{% url 'finances:create_new_paycheck' %}"  enctype="multipart/form-data">
-          {% csrf_token %}
-            <fieldset>
-              <legend><h5>Create new Paycheck</h5></legend>
-              {{create_new_paycheck}}
-              <input type="submit" value="Submit">
-            </fieldset>
-          </form>
+        <h5>
+          <i class="large material-icons" font-size: 30px>insert_chart</i>
+          Create new bill
+        </h5>
+
+      </div>
+      <div class="collapsible-body">
+        <div class="card  ">
+          <div class="card-content ">
+            <span class="card-title">
+              <div class="row">
+                <form method="POST" action="{% url 'finances:create_new_bill' %}"  enctype="multipart/form-data">
+                {% csrf_token %}
+                  <fieldset>
+                    <legend><h5>Create new bill</h5></legend>
+                    {{create_new_bill}}
+                    <input type="submit" value="Submit">
+                  </fieldset>
+                </form>
+              </div>
+            </span>
+          </div>
         </div>
+      </div>
+    </li>
+    <br>
+    <li>
+      <div class="collapsible-header">
+
+        <h5>
+          <i class="large material-icons" font-size: 30px>insert_chart</i>
+          Create new Paycheck
+        </h5>
+
+      </div>
+      <div class="collapsible-body">
+        <div class="card  darken-1">
+          <div class="card-content ">
+            <span class="card-title">
+              <div class="row">
+                <form method="POST" action="{% url 'finances:create_new_paycheck' %}"  enctype="multipart/form-data">
+                {% csrf_token %}
+                  <fieldsetlue-grey" >
+                    <legend><h5>Create new Paycheck</h5></legend>
+                    {{create_new_paycheck}}
+                    <input type="submit" value="Submit">
+                  </fieldset>
+                </form>
+              </div>
+            </span>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+
+
+
 
 
 {% endblock content %}

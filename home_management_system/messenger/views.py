@@ -12,12 +12,12 @@ from accounts.models import FamilyMember
 
 
 def update_message(request, message_id):
-    print(message_id)
+    post = request.POST
     message = Message.objects.get(id=message_id)
-    message.task_options = request.POST.get("task_options")
+    message.task_options = post.get("task_options")
     message.time_updated = datetime.now()
-    message.comments = request.POST.get("comments")
-    message.msg_author = request.POST.get("msg_author")
+    message.comments = post.get("comments")
+    message.msg_author = FamilyMember.objects.all()[int(post.get('msg_author'))]
     message.save()
 
     return redirect('/messenger/')

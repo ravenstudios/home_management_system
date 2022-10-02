@@ -18,7 +18,7 @@ class UpdateMessage(ModelForm):
     task_options = forms.ChoiceField(choices = TASK_OPTIONS)
     comments = forms.CharField(required=False)
     time_updated = models.DateTimeField(db_column='time_updated',  default=tz.now)
-    msg_author = forms.ModelChoiceField(queryset=FamilyMember.objects.all())
+    msg_author = forms.ModelChoiceField(label='Annual income', to_field_name="id", queryset=FamilyMember.objects.all(), empty_label='-- XNone --')
     class Meta:
         model = Message
         fields = ["task_options", "comments", "msg_author"]
