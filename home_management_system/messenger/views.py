@@ -22,23 +22,24 @@ def update_message(request, message_id):
 
     return redirect('/messenger/')
 
-"title", "msg", "msg_author", "msg_recipient"
+# "title", "msg", "msg_author", "msg_recipient"
 def add_new_message(request):
     post = request.POST
     if post:
         msg_author = FamilyMember.objects.all()[int(post.get('msg_author')) - 1]
+        msg_recipient = FamilyMember.objects.all()[int(post.get('msg_recipient')) - 1]
         msg = post.get("msg")
         title = post.get("title")
-        msg_recipient = post.get("msg_recipient")
-        message = f"{title}.\n From {msg_author}.\n {msg}"
+
+        msg_recipient_phone = msg_recipient.phone_number
+        message = f"{title}\n {msg}\nFrom {msg_author}"
         form = CreateNewMessage(request.POST)
 
-        print(f"form: {message}")
 
         if form.is_valid():
             # form.msg_author = FamilyMember.objects.get(name=request.POST.get("msg_author"))
             form.save()
-            return redirect('text_message:index', "2544622979", message)
+            return redirect('text_message:index', msg_recipient_phone, message)
         else:
             print(form.errors.as_data())
     return redirect('/messenger/')

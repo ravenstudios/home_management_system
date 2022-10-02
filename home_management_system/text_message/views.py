@@ -1,13 +1,17 @@
 from django.shortcuts import render
 from twilio.rest import Client
 
+import environ
+
 
 
 
 
 def send_message(to, message):
-    account_sid = 'ACd99a2e85a75181fc14af87e02e1aee05'
-    auth_token = 'cda44800ad55b5545e3f956981fb0c8b'
+    env = environ.Env()
+    environ.Env.read_env()
+    account_sid = env('ACCOUNT_SID')
+    auth_token = env('AUTH_TOKEN')
     client = Client(account_sid, auth_token)
 
     client.messages.create(
