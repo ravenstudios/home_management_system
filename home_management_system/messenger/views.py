@@ -17,20 +17,28 @@ def update_message(request, message_id):
     message.task_options = post.get("task_options")
     message.time_updated = datetime.now()
     message.comments = post.get("comments")
-    message.msg_author = FamilyMember.objects.all()[int(post.get('msg_author'))]
+    message.msg_author = FamilyMember.objects.all()[int(post.get('msg_author')) - 1]
     message.save()
 
     return redirect('/messenger/')
 
-
+"title", "msg", "msg_author", "msg_recipient"
 def add_new_message(request):
-    print(request.POST)
-    if request.POST:
+    post = request.POST
+    if post:
+        msg_author = FamilyMember.objects.all()[int(post.get('msg_author')) - 1]
+        msg = post.get("msg")
+        title = post.get("title")
+        msg_recipient = post.get("msg_recipient")
+        message = f"{title}.\n From {msg_author}.\n {msg}"
         form = CreateNewMessage(request.POST)
+
+        print(f"form: {message}")
 
         if form.is_valid():
             # form.msg_author = FamilyMember.objects.get(name=request.POST.get("msg_author"))
             form.save()
+            return redirect('text_message:index', "2544622979", message)
         else:
             print(form.errors.as_data())
     return redirect('/messenger/')

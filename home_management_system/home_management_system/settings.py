@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'shopping_list.apps.ShoppingListConfig',
     'messenger.apps.MessengerConfig',
+    'text_message.apps.TextMessageConfig',
 
 ]
 
