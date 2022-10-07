@@ -20,3 +20,12 @@ body {
   background-size: cover;
 
 }
+
+.card-content{
+  background-color: rgba(255, 255, 255, 0.3);
+
+}
+
+td{
+  border: solid 1px black;
+}

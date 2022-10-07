@@ -12,173 +12,175 @@
 {% block content %}
 <h1>Messenger</h1>
 
+<div class="container">
+  <div class="row">
+    <div class="col s12 m6 l12">
+      <div class="card horizontal ">
+          <div class="card-content ">
+            <table>
+              <tr>
+                <th><h4>Title</h4></th>
 
-<div class="row">
-  <div class="col s12 m6 l6">
-    <div class="card horizontal blue-grey">
-        <div class="card-content white-text">
-          <table>
-            <tr>
-              <th><h4>Title</h4></th>
-
-              <th><h4>From</h4></th>
-              <th><h4>To</h4></th>
+                <th><h4>From</h4></th>
+                <th><h4>To</h4></th>
 
 
-              <th>
-                <a class="btn-floating green btn-small modal-trigger" href="#add_new_message_modal">
-                  <i class="material-icons">add</i>
-                </a>
-                <div id="add_new_message_modal" class="modal modal-fixed-footer blue-grey">
-                  <div class="modal-content">
-                    <form method="POST" action="{% url 'messenger:add_new_message' %}"  enctype="multipart/form-data">
-                    {% csrf_token %}
-                      <fieldset>
-                        <legend><h5>Add New Message</h5></legend>
-                          {{ add_new_message.as_p }}
-                        <input type="submit" name="" value="OK">
-                      </fieldset>
-                    </form>
+                <th>
+                  <a class="btn-floating green btn-small modal-trigger" href="#add_new_message_modal">
+                    <i class="material-icons">add</i>
+                  </a>
+                  <div id="add_new_message_modal" class="modal modal-fixed-footer ">
+                    <div class="modal-content">
+                      <form method="POST" action="{% url 'messenger:add_new_message' %}"  enctype="multipart/form-data">
+                      {% csrf_token %}
+                        <fieldset>
+                          <legend><h5>Add New Message</h5></legend>
+                            {{ add_new_message.as_p }}
+                          <input type="submit" name="" value="OK">
+                        </fieldset>
+                      </form>
+                    </div>
                   </div>
-                </div>
-              </th>
-              <th>
-            </tr>
+                </th>
+                <th>
+              </tr>
 
-            {% for message in messages %}
-            <tr>
-              <td>
-                <a class="modal-trigger"href="#display_message_modal_{{message.id}}">
-                  <h5>{{message.title}}</h5>
-                </a>
-                <div id="display_message_modal_{{message.id}}" class="modal modal-fixed-footer  blue-grey">
-                  <div class="modal-content">
-
-                    <div class="row">
-                      <div class="col s6">
-                        <p class="yellow-text ">Title</p>
-                        <h4>{{message.title}}</h4>
-                      </div>
-                    </div>
-                    <div class="divider"></div>
-
-                    <div class="row">
-                      <div class="col s6">
-                        <p class="yellow-text ">Message</p>
-                        <h6>{{message.msg}}</h6>
-                      </div>
-                    </div>
-                    <div class="divider"></div>
-
-                    <div class="row">
-                      <div class="col s6">
-                        <p class="yellow-text ">From</p>
-                        <h6>{{message.msg_author}}</h6>
-                      </div>
-
-                    </div>
-                    <div class="divider"></div>
-
-                    <div class="row">
-                      <div class="col s6">
-                        <p class="yellow-text ">To</p>
-                        <h6>{{message.msg_recipient}}</h6>
-                      </div>
-                    </div>
-                    <div class="divider"></div>
-
-                    <div class="row">
-                      <div class="col s6">
-                        <p class="yellow-text ">Status</p>
-                        <h6>{{message.task_options}}</h6>
-                      </div>
-                    </div>
-                    <div class="divider"></div>
-
-                    <div class="row">
-                      <div class="col s6">
-                        <p class="yellow-text ">Comments</p>
-                        <h6>{{message.comments}}</h6>
-                      </div>
-                    </div>
-                    <div class="divider"></div>
-
-
-                    <div class="row">
-                      <div class="col s6">
-                        <p class="yellow-text ">Created</p>
-                        <h6>{{message.time_created}}</h6>
-                      </div>
-                    </div>
-                    <div class="divider"></div>
-
-                    <div class="row">
-                      <div class="col s6">
-                        <p class="yellow-text ">Updated</p>
-                        <h6>{{message.time_updated}}</h6>
-                      </div>
-                    </div>
-                    <div class="divider"></div>
-
-                    <div class="card-action">
+              {% for message in messages %}
+              <tr>
+                <td>
+                  <a class="modal-trigger"href="#display_message_modal_{{message.id}}">
+                    <h5>{{message.title}}</h5>
+                  </a>
+                  <div id="display_message_modal_{{message.id}}" class="modal modal-fixed-footer  ">
+                    <div class="modal-content">
 
                       <div class="row">
                         <div class="col s6">
-                          <a class="btn-floating blue btn-small modal-trigger"href="#update_message_modal_{{message.id}}">
-                            <i class="material-icons">edit</i>
-                          </a>
-                          <div id="update_message_modal_{{message.id}}" class="blue-grey modal modal-fixed-footer">
-                            <div class="modal-content">
-
-                              <form method="POST" action="{% url 'messenger:update_message' message_id=message.id %}"  enctype="multipart/form-data">
-                              {% csrf_token %}
-                                <fieldset>
-                                  <legend><h5>Update {{message.title}} </h5></legend>
-                                  {{update_message.as_p}}
-
-                                  <input type="submit" name="" value="OK">
-                                </fieldset>
-                              </form>
-                            </div>
-                          </div>
+                          <p class="yellow-text ">Title</p>
+                          <h4>{{message.title}}</h4>
                         </div>
+                      </div>
+                      <div class="divider"></div>
 
+                      <div class="row">
                         <div class="col s6">
-                          <a class="btn-floating red btn-small " href="{% url 'messenger:delete_message' message_id=message.id%}">
-                            <i class="material-icons">delete</i>
-                          </a>
+                          <p class="yellow-text ">Message</p>
+                          <h6>{{message.msg}}</h6>
+                        </div>
+                      </div>
+                      <div class="divider"></div>
+
+                      <div class="row">
+                        <div class="col s6">
+                          <p class="yellow-text ">From</p>
+                          <h6>{{message.msg_author}}</h6>
                         </div>
 
                       </div>
+                      <div class="divider"></div>
+
+                      <div class="row">
+                        <div class="col s6">
+                          <p class="yellow-text ">To</p>
+                          <h6>{{message.msg_recipient}}</h6>
+                        </div>
+                      </div>
+                      <div class="divider"></div>
+
+                      <div class="row">
+                        <div class="col s6">
+                          <p class="yellow-text ">Status</p>
+                          <h6>{{message.task_options}}</h6>
+                        </div>
+                      </div>
+                      <div class="divider"></div>
+
+                      <div class="row">
+                        <div class="col s6">
+                          <p class="yellow-text ">Comments</p>
+                          <h6>{{message.comments}}</h6>
+                        </div>
+                      </div>
+                      <div class="divider"></div>
 
 
+                      <div class="row">
+                        <div class="col s6">
+                          <p class="yellow-text ">Created</p>
+                          <h6>{{message.time_created}}</h6>
+                        </div>
+                      </div>
+                      <div class="divider"></div>
+
+                      <div class="row">
+                        <div class="col s6">
+                          <p class="yellow-text ">Updated</p>
+                          <h6>{{message.time_updated}}</h6>
+                        </div>
+                      </div>
+                      <div class="divider"></div>
+
+                      <div class="card-action">
+
+                        <div class="row">
+                          <div class="col s6">
+                            <a class="btn-floating blue btn-small modal-trigger"href="#update_message_modal_{{message.id}}">
+                              <i class="material-icons">edit</i>
+                            </a>
+                            <div id="update_message_modal_{{message.id}}" class=" modal modal-fixed-footer">
+                              <div class="modal-content">
+
+                                <form method="POST" action="{% url 'messenger:update_message' message_id=message.id %}"  enctype="multipart/form-data">
+                                {% csrf_token %}
+                                  <fieldset>
+                                    <legend><h5>Update {{message.title}} </h5></legend>
+                                    {{update_message.as_p}}
+
+                                    <input type="submit" name="" value="OK">
+                                  </fieldset>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col s6">
+                            <a class="btn-floating red btn-small " href="{% url 'messenger:delete_message' message_id=message.id%}">
+                              <i class="material-icons">delete</i>
+                            </a>
+                          </div>
+
+                        </div>
+
+
+
+                      </div>
 
                     </div>
-
                   </div>
-                </div>
-              </td>
-              <td><h5>{{message.msg_author }}</h5></td>
-              <td><img src="{{message.msg_recipient.image.url}}" width="60" alt=""></td>
+                </td>
+                <td><h5>{{message.msg_author }}</h5></td>
+                <td><img src="{{message.msg_recipient.image.url}}" width="60" alt=""></td>
 
 
-            </tr>
-            {% endfor %}
+              </tr>
+              {% endfor %}
 
 
-          </table>
-
-
+            </table>
 
 
 
 
 
 
-        </div>
+
+
+          </div>
+      </div>
     </div>
   </div>
 </div>
+
 
 
 

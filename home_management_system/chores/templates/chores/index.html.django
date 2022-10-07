@@ -1,0 +1,103 @@
+{% extends "main_index.html" %}
+{% load static %}
+
+
+{% block header %}
+{% endblock header %}
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col l12">
+      <div class="card horizontal ">
+          <div class="card-content ">
+            {% comment "Optional note" %}
+            {# <a class="btn-floating z-depth-5 green btn-small modal-trigger" href="#add_item_to_list_{{list.id}}">
+              <i class="material-icons">add</i>
+            </a>
+            <h1>stuff</h1>
+            {{add_new_chore.as_p}} #}
+            {% endcomment %}
+
+            <h1>Jordan</h1>
+            <table class="highlight">
+              <tr>
+                <th>Day</th>
+                <th>Chore</th>
+                <th>Completed</th>
+              </tr>
+              <tr>
+                <th>Sun</th>
+              </tr>
+              <tr>
+                <th>Mon</th>
+                <td>
+                  <p>Dishes</p>
+
+                </td>
+                <td>Trash</td>
+                <td>Take out trash to road</td>
+                <td>clean room</td>
+                <td>
+                  <a class="btn-floating z-depth-5 blue btn-large modal-trigger" href="#choreX">
+                    <i class="material-icons">add_shopping_cart</i>
+                  </a>
+                  <div id="choreX" class="modal modal-fixed-footer">
+                    <div class="modal-content">
+                      <form method="POST" action="{% url 'shopping_list:create_new_list'  %}"  enctype="multipart/form-data">
+                      {% csrf_token %}
+                        <fieldset>
+                          <legend><h5>Chore completed form</h5></legend>
+                          <input type="text" name="" value="this will be a checkbox">
+                          <input type="text" name="" value="Notes">
+                          <input type="text" name="" value="date">
+                          <input type="submit" name="" value="OK">
+                          <input type="submit" name="" value="Parent OK">
+                        </fieldset>
+                      </form>
+                    </div>
+                  </div>
+                </td>
+
+              </tr>
+              <tr>
+                <th>Tue</th>
+              </tr>
+              <tr>
+                <th>Wed</th>
+              </tr>
+              <tr>
+                <th>Thur</th>
+              </tr>
+              <tr>
+                <th>Fri</th>
+              </tr>
+              <tr>
+                <th>Sat</th>
+              </tr>
+
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col l4">
+        <div class="card horizontal ">
+            <div class="card-content ">
+              <h1>stuff</h1>
+            </div>
+          </div>
+        </div>
+
+        <div class="col l4">
+          <div class="card horizontal ">
+              <div class="card-content ">
+                <h1>stuff</h1>
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
+{% endblock content %}

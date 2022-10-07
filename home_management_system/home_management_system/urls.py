@@ -13,6 +13,7 @@ urlpatterns = [
     path('shopping_list/', include('shopping_list.urls')),
     path('messenger/', include('messenger.urls')),
     path('text_message/', include('text_message.urls')),
+    path('chores/', include('chores.urls')),
     path('admin/', admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
 
