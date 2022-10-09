@@ -9,6 +9,7 @@ app_name = 'chores'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('add_new_chore', views.add_new_chore, name='add_new_chore'),
 
 
 ]

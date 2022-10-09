@@ -25,6 +25,7 @@ def update_message(request, message_id):
 # "title", "msg", "msg_author", "msg_recipient"
 def add_new_message(request):
     post = request.POST
+    print(post)
     if post:
         msg_author = FamilyMember.objects.all()[int(post.get('msg_author')) - 1]
         msg_recipient = FamilyMember.objects.all()[int(post.get('msg_recipient')) - 1]

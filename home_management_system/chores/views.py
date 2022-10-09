@@ -1,17 +1,43 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import redirect
+from .models import Chore, Day
+from .forms import AddNewChore, CompleteChore
+from accounts.models import FamilyMember
 
-from .models import Chore
-from .forms import AddNewChore
 
 def index(request):
     chores = Chore.objects.all
     add_new_chore = AddNewChore(request.POST)
+    completed_chore = CompleteChore(request.POST)
+    week = Day.objects.all
     context = {
         "chores" : chores,
         "add_new_chore" : add_new_chore,
+        "week" : week,
+        "completed_chore" : completed_chore,
     }
     return render(request, 'chores/index.html.django', context)
+
+
+
+
+
+def add_new_chore(request):
+    print(f"post: {request.POST}")
+    if request.POST:
+        form = AddNewChore(request.POST)
+        # print(form)
+        # assigned_to = FamilyMember.objects.filter(first_name='').first()
+        # form.instance.assigned_to = assigned_to
+        if form.is_valid():
+
+            form.save()
+        else:
+
+            print(form.errors.as_data())
+    return redirect('/chores/')
+
 
 
 # from django.shortcuts import render
