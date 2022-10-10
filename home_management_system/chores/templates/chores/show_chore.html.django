@@ -1,14 +1,23 @@
 <td class="{{chore.chore_status}}">
-  <a class=" z-depth-5  modal-trigger" href="#chore_completed_{{chore.id}}">
-    <div>
+  <a class=" z-depth-5  modal-trigger" href="#show_chore{{chore.id}}">
+    <div class="">
       <b>
         {{chore.chore_name}}
       </b>
-      <p>
-        {{chore.note.as_p}}
-      </p>
-
     </div>
   </a>
+
+  <div id="show_chore{{chore.id}}" class="modal">
+    <div class="modal-content">
+      <h4>{{chore.chore_name}}</h4>
+      <p>Notes: {{chore.note}}</p>
+      <p>Created: {{chore.date_created}}</p>
+      <p>Completed: {{chore.date_completed}}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button"><a class="z-depth-5  modal-trigger" href="#chore_completed_{{chore.id}}">Complete</a></button>
+    </div>
+
+  </div>
   {% include 'chores/complete_chore.html.django' %}
 </td>
