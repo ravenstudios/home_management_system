@@ -1,0 +1,14 @@
+<div id="add_new_chore_{{day.id}}" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <form method="POST" action="{% url 'chores:add_new_chore' day_id=day.id %}"  enctype="multipart/form-data">
+      {% csrf_token %}
+      <fieldset>
+
+        <legend><h5>Add new chore</h5></legend>
+          {{ add_new_chore.as_p }}
+
+        <input type="submit" value="Submit">
+      </fieldset>
+    </form>
+  </div>
+</div>

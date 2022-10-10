@@ -5,21 +5,18 @@ from django.forms.widgets import DateInput, NumberInput,CheckboxInput
 from accounts.models import FamilyMember
 
 class AddNewChore(ModelForm):
-    # assigned_to = forms.ModelChoiceField(queryset=FamilyMember.objects.all())
-
 
     class Meta:
         model = Chore
+        fields = ["chore_name", "note", "assigned_to", "repeated_chore"]
 
-
-
-        fields = ["assigned_to", "chore_name", "note"]
-
-
+        widgets = {"note": forms.Textarea}
 
 class CompleteChore(ModelForm):
 
+
     class Meta:
         model = Chore
+        fields = ["note", "completed", "parents_completed"]
 
-        fields = ["note", "completed", "partents_completed"]
+        widgets = {"note": forms.Textarea}

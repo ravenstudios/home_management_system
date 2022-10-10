@@ -29,3 +29,25 @@ body {
 td{
   border: solid 1px black;
 }
+
+
+.input-field label {
+  pointer-events: auto;
+}
+
+
+.pending{
+  background-color: yellow;
+}
+
+.done{
+  background-color: green;
+}
+
+.parent_approved{
+  background-color: purple;
+}
+
+.late{
+  background-color: red;
+}

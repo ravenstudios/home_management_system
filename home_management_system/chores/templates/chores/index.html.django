@@ -25,85 +25,23 @@
                 <tr>
                   <th>{{day}}</th>
                   {% for chore in day.chores.all %}
-                  <td>
-                    <a class=" z-depth-5  modal-trigger" href="#chore_completed_{{chore.id}}">
-                      {{chore.chore_name}}
-                    </a>
-                    <div id="chore_completed_{{chore.id}}" class="modal modal-fixed-footer">
-                      <div class="modal-content">
-                        <form method="POST" action="{% url 'shopping_list:create_new_list'  %}"  enctype="multipart/form-data">
-                        {% csrf_token %}
-                          <fieldset>
-                            {{completed_chore.as_p}}
-                            <legend><h5>Chore completed form</h5></legend>
 
-                            <label>
-                                <input id="completed_checkbox" type="checkbox" />
-                                <span>Completed</span>
-                            </label>
-
-                            <label>
-                                <input id="partents_completed_checkbox" type="checkbox" />
-                                <span>Partents Completed</span>
-                            </label>
-                            <input type="submit" name="" value="Submit">
-                          </fieldset>
-                        </form>
-                      </div>
-                    </div>
+                    {% include 'chores/show_chore.html.django' %}
 
 
-                  </td>
                   {% endfor %}
                   <td>
-                    <a class="btn-floating z-depth-5 blue btn-small modal-trigger" href="#add_new_chore_{{chore.id}}">
+                    <a class="btn-floating z-depth-5 blue btn-small modal-trigger" href="#add_new_chore_{{day.id}}">
                       <i class="material-icons">add</i>
                     </a>
-                    <div id="add_new_chore_{{chore.id}}" class="modal modal-fixed-footer">
-                      <div class="modal-content">
-                        <form method="POST" action="{% url 'chores:add_new_chore'  %}"  enctype="multipart/form-data">
-                          {% csrf_token %}
-                          <fieldset>
-
-                            <legend><h5>Add new chore</h5></legend>
-                              {{ add_new_chore.as_p }}
-
-                            <input type="submit" value="Submit">
-                          </fieldset>
-                        </form>
-                      </div>
-                    </div>
+                    {% include 'chores/add_new_chore_form.html.django' %}
                   </td>
                 </tr>
-
-
-
               {% endfor %}
-
-
-
-
-
             </table>
           </div>
         </div>
       </div>
-
-      <div class="col l4">
-        <div class="card horizontal ">
-            <div class="card-content ">
-              <h1>stuff</h1>
-            </div>
-          </div>
-        </div>
-
-        <div class="col l4">
-          <div class="card horizontal ">
-              <div class="card-content ">
-                <h1>stuff</h1>
-              </div>
-            </div>
-          </div>
     </div>
 </div>
 {% endblock content %}

@@ -1,0 +1,14 @@
+<td class="{{chore.chore_status}}">
+  <a class=" z-depth-5  modal-trigger" href="#chore_completed_{{chore.id}}">
+    <div>
+      <b>
+        {{chore.chore_name}}
+      </b>
+      <p>
+        {{chore.note.as_p}}
+      </p>
+
+    </div>
+  </a>
+  {% include 'chores/complete_chore.html.django' %}
+</td>
