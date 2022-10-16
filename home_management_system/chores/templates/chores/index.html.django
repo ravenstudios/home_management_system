@@ -9,29 +9,32 @@
 {% block content %}
 
 <div class="container">
+  {% for user in users %}
   <div class="row">
     <div class="col l12">
       <div class="card horizontal ">
           <div class="card-content ">
 
-            <h1>Jordan</h1>
+            <h1>{{user}}</h1>
             <table class="highlight">
               <tr>
                 <th>Day</th>
                 <th>Chore</th>
                 <th>Completed</th>
               </tr>
-              {% for day in week %}
+              {% for day, chores in week %}
+
                 <tr>
                   <th>{{day}}</th>
-                  {% for chore in day.chores.all %}
+
+                  {% for chore in chores %}
 
                     {% include 'chores/show_chore.html.django' %}
 
 
                   {% endfor %}
                   <td>
-                    <a class="btn-floating z-depth-5 blue btn-small modal-trigger" href="#add_new_chore_{{day.id}}">
+                    <a class="btn-floating z-depth-5 blue btn-small modal-trigger" href="#add_new_chore_{{day}}">
                       <i class="material-icons">add</i>
                     </a>
                     {% include 'chores/add_new_chore_form.html.django' %}
@@ -43,5 +46,7 @@
         </div>
       </div>
     </div>
+  {% endfor %}
+
 </div>
 {% endblock content %}

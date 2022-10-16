@@ -9,8 +9,8 @@ app_name = 'chores'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('add_new_chore/<str:day_id>', views.add_new_chore, name='add_new_chore'),
-    path('complete_chore/<str:chore_id>/<str:day_id>', views.complete_chore, name='complete_chore'),
+    path('add_new_chore/<str:day>/<str:user>', views.add_new_chore, name='add_new_chore'),
+    path('complete_chore/<str:chore_id>/<str:user>', views.complete_chore, name='complete_chore'),
 
 
 ]

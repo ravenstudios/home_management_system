@@ -1,5 +1,8 @@
 from django.core.management.base import BaseCommand, CommandError
+from django.utils import timezone
 from chores.models import Chore
+from django.utils.timezone import now, localtime
+import datetime
 
 class Command(BaseCommand):
     help = 'Refreshes status for all chores '
@@ -11,5 +14,9 @@ class Command(BaseCommand):
         chores = Chore.objects.all()
 
         for chore in chores:
-            chore.chore_status = "pending"
-            chore.save()
+            if chore.repeated_chore:
+                chore.chore_status = "pending"
+                chore.date_created = datetime.datetime.now()
+                chore.date_completed = datetime.datetime.now()
+                chore.date_parent_completed = datetime.datetime.now()
+                chore.save()

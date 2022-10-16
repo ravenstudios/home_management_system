@@ -8,7 +8,7 @@ class AddNewChore(ModelForm):
 
     class Meta:
         model = Chore
-        fields = ["chore_name", "note", "assigned_to", "repeated_chore"]
+        fields = ["chore_name", "note", "repeated_chore"]
 
         widgets = {"note": forms.Textarea}
 

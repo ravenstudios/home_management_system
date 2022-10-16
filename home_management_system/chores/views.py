@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from .models import Chore, Day
+from .models import Chore
 from .forms import AddNewChore, CompleteChore
 from accounts.models import FamilyMember
 from django.utils import timezone
@@ -9,41 +9,66 @@ from django.utils import timezone
 
 
 def index(request):
-    chores = Chore.objects.all
+    days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"]
+    week = []
+
+
+    for day in days:
+        # week.append({"day" : day, "chores" : []})
+        week.append([day, []])
+
+
+
+
+    for chore in Chore.objects.all():
+        day = chore.day_assigned
+        day_index = days.index(chore.day_assigned)
+        week[day_index][1].append(chore)
+
     add_new_chore = AddNewChore(request.POST)
     completed_chore = CompleteChore(request.POST)
-    week = Day.objects.all
     context = {
-        "chores" : chores,
+        # "chores" : chores,
         "add_new_chore" : add_new_chore,
-        "week" : week,
         "completed_chore" : completed_chore,
+        "week": week,
+        "users" : ["Jordan", "Krystle", "Rob"]
     }
     return render(request, 'chores/index.html.django', context)
 
 
 
-def add_new_chore(request, day_id):
+def add_new_chore(request, day, user):
     post = request.POST
-
+    print(f"day:{day}")
     if post:
         new_chore = AddNewChore(post)
-        day = Day.objects.get(id=day_id)
+
 
         if new_chore.is_valid():
             chore_name = post.get("chore_name")
             note = post.get("note")
-            assigned_to = FamilyMember.objects.get(id=post.get("assigned_to"))
+            assigned_to = FamilyMember.objects.get(name=user)
+            day_assigned = day
             new_chore.save(commit=False)
+
+            repeated_chore = post.get("repeated_chore")
+
+            if repeated_chore == "true":
+                repeated_chore = True
+            else:
+                repeated_chore = False
 
             chore = Chore.objects.create(
                 chore_name = chore_name,
                 note = note,
                 assigned_to = assigned_to,
-                date_created = timezone.now()
+                date_created = timezone.now(),
+                repeated_chore = repeated_chore,
+                day_assigned = day_assigned
                 )
 
-            day.chores.add(chore)
+
 
         else:
             print(form.errors.as_data())
@@ -52,9 +77,9 @@ def add_new_chore(request, day_id):
 
 
 
-def complete_chore(request, chore_id, day_id):
+def complete_chore(request, chore_id,  user):
     post = request.POST
-    day = Day.objects.get(id=day_id)
+
 
 
 
@@ -85,12 +110,18 @@ def complete_chore(request, chore_id, day_id):
 
         chore.note += "\n" + note
         chore.completed = completed
+        chore.save()
+
 
         if parents_completed:
             chore.parents_completed = parents_completed
-            day.chores.remove(chore)
+            
+            if not chore.repeated_chore:
+                chore.delete()
+            else:
+                chore.save()
 
 
-        chore.save()
+
 
     return redirect('/chores/')
