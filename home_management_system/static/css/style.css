@@ -27,7 +27,9 @@ body {
 }
 
 td{
-  border: solid 1px black;
+  text-align: center;
+  border: solid 5px black;
+  margin-left: 10px;
 }
 
 
@@ -37,7 +39,7 @@ td{
 
 
 .pending{
-  background-color: yellow;
+  background-color: purple;
 }
 
 .done{
@@ -49,5 +51,13 @@ td{
 }
 
 .late{
+  background-color: yellow;
+}
+
+.failed{
   background-color: red;
+}
+
+.in_progress{
+  background-color: #80ced6;
 }

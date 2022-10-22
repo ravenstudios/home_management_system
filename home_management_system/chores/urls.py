@@ -11,7 +11,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('add_new_chore/<str:day>/<str:user>', views.add_new_chore, name='add_new_chore'),
     path('complete_chore/<str:chore_id>/<str:user>', views.complete_chore, name='complete_chore'),
-
+    path('start_chore/<str:chore_id>', views.start_chore, name='start_chore'),
 
 ]
 

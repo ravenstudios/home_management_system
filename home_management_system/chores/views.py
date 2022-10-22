@@ -17,9 +17,6 @@ def index(request):
         # week.append({"day" : day, "chores" : []})
         week.append([day, []])
 
-
-
-
     for chore in Chore.objects.all():
         day = chore.day_assigned
         day_index = days.index(chore.day_assigned)
@@ -32,7 +29,7 @@ def index(request):
         "add_new_chore" : add_new_chore,
         "completed_chore" : completed_chore,
         "week": week,
-        "users" : ["Jordan", "Krystle", "Rob"]
+        "users" : ["Jordan", "Krystle", "Rob"],
     }
     return render(request, 'chores/index.html.django', context)
 
@@ -40,7 +37,6 @@ def index(request):
 
 def add_new_chore(request, day, user):
     post = request.POST
-    print(f"day:{day}")
     if post:
         new_chore = AddNewChore(post)
 
@@ -76,13 +72,22 @@ def add_new_chore(request, day, user):
     return redirect('/chores/')
 
 
+def start_chore(request, chore_id):
+    post = request.POST
+    print(f"post: {chore_id}")
+    if True:
+        print(f"post: {post}")
+        chore = Chore.objects.get(id=chore_id)
+        chore.chore_start_time = timezone.now()
+        chore.chore_status = "in_progress"
+        print(f"chore name: {chore.chore_name}")
+        chore.save()
+    return redirect('/chores/')
+
+
 
 def complete_chore(request, chore_id,  user):
     post = request.POST
-
-
-
-
 
     if post:
         chore = Chore.objects.get(id=chore_id)
@@ -115,7 +120,7 @@ def complete_chore(request, chore_id,  user):
 
         if parents_completed:
             chore.parents_completed = parents_completed
-            
+
             if not chore.repeated_chore:
                 chore.delete()
             else:

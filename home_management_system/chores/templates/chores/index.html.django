@@ -18,9 +18,14 @@
             <h1>{{user}}</h1>
             <table class="highlight">
               <tr>
-                <th>Day</th>
-                <th>Chore</th>
-                <th>Completed</th>
+                <th class="pending">Pending</th>
+                <th class="late">Late</th>
+                <th class="done">Completed</th>
+                <th class="failed">Failed</th>
+
+              </tr>
+              <tr>
+
               </tr>
               {% for day, chores in week %}
 
@@ -42,6 +47,8 @@
                 </tr>
               {% endfor %}
             </table>
+
+            {% include 'chores/show_compleated_chores.html.django' %}
           </div>
         </div>
       </div>

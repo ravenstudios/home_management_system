@@ -1,0 +1,21 @@
+<td>
+  <a class=" z-depth-5  modal-trigger" href="#show_compleated_chores">
+    Chore Logs
+  </a>
+
+  <div id="show_compleated_chores" class="modal">
+    <div class="modal-content">
+      <table>
+        <tr>
+          <th>Stuff</th>
+        </tr>
+        {% for chore in show_completed_chores.all %}
+        <p>{{chore}}</p>
+        {% endfor %}
+      </table>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </div>
+
+</td>

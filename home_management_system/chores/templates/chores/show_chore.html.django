@@ -16,8 +16,8 @@
     </div>
     <div class="modal-footer">
       <button type="button"><a class="z-depth-5  modal-trigger" href="#chore_completed_{{chore.id}}">Complete</a></button>
+      <button type="button"><a class="z-depth-5" href="{% url 'chores:start_chore' chore_id=chore.id %}">Start Chore</a></button>
     </div>
-
   </div>
   {% include 'chores/complete_chore.html.django' %}
 </td>
