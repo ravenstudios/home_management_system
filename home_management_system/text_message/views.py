@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from twilio.rest import Client
-
 import environ
 
 

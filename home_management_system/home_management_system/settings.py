@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'material',
     'materializeform',
+    'django_crontab',
     'hms.apps.HmsConfig',
     'finances.apps.FinancesConfig',
     "django_browser_reload",
