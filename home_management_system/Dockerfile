@@ -7,7 +7,7 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /hms
 WORKDIR /hms
 COPY . /hms/
-COPY /home/ravenstudios/hms/db.sqlite3 /hms/
+COPY /home/ravenstudios/hms/db.sqlite3 /hms/db.sqlite3
 COPY requirements.txt /hms/requirements.txt
 
 
