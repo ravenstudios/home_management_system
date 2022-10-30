@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'home_management_system.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR  'db.sqlite3',
+        'NAME': BASE_DIR / 'hms_db/db.sqlite3',
     }
 }
 
