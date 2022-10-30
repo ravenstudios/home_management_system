@@ -12,4 +12,4 @@ COPY . .
 
 EXPOSE 1234
 
-CMD ["python3", "./manage.py", "runserver", "192.168.6.3:1234"]
+CMD python3 ./manage.py runserver 192.168.6.3:1234
