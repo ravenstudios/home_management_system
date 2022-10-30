@@ -9,7 +9,7 @@ WORKDIR /hms
 COPY . /hms/
 # COPY /home/ravenstudios/hms/db.sqlite3 /hms/db.sqlite3
 COPY requirements.txt /hms/requirements.txt
-VOLUME /hms_db
+
 
 RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
