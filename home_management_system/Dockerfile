@@ -1,21 +1,19 @@
+#  Home Management System Dockerfile
 FROM python:3.9
+
 
 ENV PYTHONUNBUFFERED 1
 
-RUN mkdir /app
+RUN mkdir /hms
+WORKDIR /hms
+COPY . /hms/
+COPY requirements.txt /hms/requirements.txt
 
-WORKDIR /app
-
-COPY . /app/
 
 RUN pip3 install --upgrade pip
-
-COPY requirements.txt /app/requirements.txt
-
 RUN pip3 install -r requirements.txt
-
 
 
 EXPOSE 1234
 
-CMD python manage.py runserver 0.0.0.0:1234
+# CMD python manage.py runserver 0.0.0.0:1234
