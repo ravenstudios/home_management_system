@@ -1,4 +1,4 @@
-FROM python:3.8.2-slim-buster
+FROM python:3.8.2
 
 WORKDIR /app
 
@@ -12,4 +12,4 @@ COPY . .
 
 EXPOSE 1234
 
-CMD python3 ./manage.py runserver 192.168.6.3:1234
+CMD python3 manage.py runserver 192.168.6.3:1234
