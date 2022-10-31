@@ -1,16 +1,13 @@
 from django.shortcuts import render
 from twilio.rest import Client
-import environ
-
+from django.conf import settings
 
 
 
 
 def send_message(to, message):
-    env = environ.Env()
-    environ.Env.read_env()
-    account_sid = env('ACCOUNT_SID')
-    auth_token = env('AUTH_TOKEN')
+    account_sid = settings.ACCOUNT_SID
+    auth_token = settings.AUTH_TOKEN
     client = Client(account_sid, auth_token)
 
     client.messages.create(
@@ -23,8 +20,6 @@ def send_message(to, message):
 
 
 def index(request, to, message):
-    print(f"to{to}")
-
     send_message(to, message)
     context = {}
-    return render(request, 'finances/index.html.django', context)
+    return render(request, 'messenger/index.html.django', context)

@@ -5,9 +5,9 @@ from django.utils.timezone import now, localtime
 import datetime
 from django.shortcuts import redirect
 from twilio.rest import Client
-import environ
 import text_message
 import requests
+from django.conf import settings
 
 
 
@@ -44,10 +44,8 @@ class Command(BaseCommand):
 
             message = f"You have {num_of_late_chores} late chores.\n {late_chore_names} Do them now or be beaten.\n But please, have a nice day"
 
-            env = environ.Env()
-            environ.Env.read_env()
-            account_sid = env('ACCOUNT_SID')
-            auth_token = env('AUTH_TOKEN')
+            account_sid = settings.ACCOUNT_SID
+            auth_token = settings.AUTH_TOKEN
             client = Client(account_sid, auth_token)
 
             for pn in phone_numbers:
