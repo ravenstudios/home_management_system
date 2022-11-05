@@ -29,7 +29,7 @@ def index(request):
         "add_new_chore" : add_new_chore,
         "completed_chore" : completed_chore,
         "week": week,
-        "users" : ["Jordan", "Krystle", "Rob"],
+        "users" : ["Jordan"],
     }
     return render(request, 'chores/index.html.django', context)
 
